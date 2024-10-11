@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	layout:decorate="~{fragments/layout}" lang="en">
+
+<head>
+<title>Despacho Presidencial</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+</head>
+
+<body>
+	<div layout:fragment="content" th:remove="tag">
+		<label id="appTxt" th:text="${session.app}" hidden="hidden"></label>
+		<div class="container">
+			<div id="containerFrontpag">
+				<div class="row presidencia-container" style="margin-top: auto;">
+					<div class="col-sm-12">
+						<div class="institution__higher-official-president"
+							style="margin-bottom: 10px;">
+							<div class="container-fluid" id="grad1">
+								<div class="row justify-content-center mt-0">
+									<div class="col-12 col-sm-12 text-center p-0  mb-2">
+										<div class="card card-wizard px-0 pt-4 pb-0 mt-3 mb-3">
+											<div class="col-6" style="align-self: center;">
+												<!-- 							                    <div style="text-align: center;"> -->
+												<!-- 							                    	<div class=""> <img src="images/mante.png" class="fit-image"> </div>	 -->
+												<!-- 								    			</div> -->
+												<div style="text-align: justify;">
+													<div id="msjMante">
+														<label style="font-size: 16px;" id="mensajeError"
+															th:text="${mensajeError}"></label>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

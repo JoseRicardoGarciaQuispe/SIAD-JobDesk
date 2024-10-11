@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" 
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="~{fragments/layout :: head}"></head>
+<!-- Incluye el fragmento 'head' desde layout.html, que contiene las configuraciones generales y las referencias a archivos CSS y JS -->
+
+<body>
+
+    <!-- Incluye el menú de navegación desde el archivo menu.html -->
+    <div th:replace="~{fragments/menu :: menu}"></div>
+
+    <!-- Contenido principal de la página -->
+    <div layout:fragment="content" th:remove="tag">
+        <div class="" style="margin: auto;width: 75%;">
+            <h2 style="text-align: center;padding: 20px;margin-bottom: 0px;">
+                <span style="border-left: 4px solid #BF0909; margin-right: 10px;"></span>
+                Consulta de Saldo Vacacional
+            </h2>
+
+            <!-- Formulario para buscar el saldo vacacional -->
+            <div class="row">
+                <div class="form-group col-lg-12 my-2">
+                    <div class="card">
+                        <div class="card-header col-lg-12"
+                             style="text-align: -webkit-left; display: flex; align-items: center; background-color: #213343; color: white;">
+                            <i class="fa-solid fa-file-lines" style="font-size: 32px; margin-right: 20px;"></i>
+                            <div>
+                                <h2 style="text-align: left; margin-bottom: 0px; color: white;">
+                                    <b>Listado de Saldo Vacacional</b>
+                                </h2>
+                            </div>
+                        </div>
+
+                        <!-- Cuerpo del formulario para seleccionar la oficina y buscar empleados -->
+                        <div class="card-body">
+                            <div class="row" style="margin-bottom: 10px;">
+                                <div class="col-lg-1 d-flex align-items-center">
+                                    <label for="label1">Oficina</label>
+                                </div>
+                                <div class="col-lg-4 d-flex align-items-center">
+                                    <!-- Lista desplegable para seleccionar la oficina -->
+                                    <select id="selectOficina" name="selectOficina" class="form-control">
+                                        <!-- Llenado dinámico de opciones con Thymeleaf -->
+                                        <option th:each="oficina : ${listaOficinas}"
+                                                th:value="${oficina.codigo}" th:text="${oficina.nombre}">
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <!-- Campo de búsqueda de empleado -->
+                                <div class="col-lg-1 d-flex align-items-center">
+                                    <label for="label2">Empleado</label>
+                                </div>
+                                <div class="col-lg-4 d-flex align-items-center">
+                                    <input type="text" id="txtEmpleado" name="txtEmpleado" class="form-control" 
+                                           placeholder="buscar por nombres o apellidos">
+                                </div>
+
+                                <!-- Botón para realizar la búsqueda -->
+                                <div class="col-lg-2 d-flex align-items-center justify-content-end">
+                                    <button type="button" onclick="buscarSaldoVacacional()" 
+                                            class="btn btn-xs w3-btn w3-red" title="Buscar saldo vacacional">
+                                        <i class="fas fa-search"></i> Buscar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tabla para mostrar los resultados del saldo vacacional -->
+                <div class="form-group col-lg-12 my-2">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card" style="border: none">
+                                <div class="card-body p-0 m-0">
+                                    <!-- Tabla para mostrar los resultados -->
+                                    <table id="tableSaldoVacacional" class="table table-hover table-sm-vertical" width="100%">
+                                        <thead class="thead-light">
+                                            <tr>
+                                                <th class="" style="text-align: center; vertical-align: inherit; height: auto;"><b>Cód. Empl.</b></th>
+                                                <th class="" style="text-align: center; vertical-align: inherit; height: auto;"><b>Apellidos y Nombres</b></th>
+                                                <th class="" style="text-align: center; vertical-align: inherit; height: auto;"><b>Fecha Ingreso</b></th>
+                                                <th class="" style="text-align: center; vertical-align: inherit; height: auto;"><b>Oficina</b></th>
+                                                <th class="" style="text-align: center; vertical-align: inherit; height: auto;"><b>Pend. años anteriores</b></th>
+                                                <th class="" style="text-align: center; vertical-align: inherit; height: auto;"><b>Pend. año actual</b></th>
+                                                <th class="" style="text-align: center; vertical-align: inherit; height: auto;"><b>Mes Prog</b></th>
+                                                <th class="" style="text-align: center; vertical-align: inherit; height: auto;"><b>Total Pendiente</b></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <!-- Aquí se llenarán los datos dinámicamente desde el backend -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Incluye el pie de página desde el archivo footer.html -->
+    <footer th:replace="~{fragments/layout :: footer}"></footer>
+
+    <!-- Input oculto para mensajes del sistema -->
+    <input type="hidden" name="messageSystem" id="messageSystem" th:value="${messageSystem}">
+
+    <!-- Modal de carga para mostrar mientras se obtienen los datos -->
+    <div class="modal" id="modalLoading" data-backdrop="static"
+         data-keyboard="false" tabindex="-1"
+         style="padding-right: 17px; display: none;" aria-modal="true">
+        <div class="modal-dialog modal-sm dialog-loading">
+            <div class="modal-content"
+                 style="width: 48px; background-color: transparent; border: none; margin: auto; margin-bottom: 10px;">
+                <span class="loader"></span>
+            </div>
+            <h3 class="text-center" id="messageModalLoading" style="color: white">Cargando. . .</h3>
+        </div>
+    </div>
+
+    <!-- Script para manejar las interacciones y funciones relacionadas con la consulta de saldo vacacional -->
+    <script th:src="@{/js/jobdesk/asistencia/saldovacacional/saldoVacacional.js}"> </script>
+
+    <!-- Script para inicializar la configuración de la página al cargar -->
+    <script>
+        $(document).ready(function() {
+            configuraciones();  // Función que inicializa configuraciones cuando la página carga
+            $("#item-jobdesk").addClass("active");  // Marca el ítem del menú como activo
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="~{fragments/layout :: head}"></head>
+
+<body>
+
+	<div th:replace="~{fragments/menu :: menu}"></div>
+	<div layout:fragment="content" th:remove="tag">
+		<div class="" style="margin: auto;width: 90%;">
+			<h2 style="text-align: center;padding: 20px;margin-bottom: 0px;"><span style="
+			    border-left: 4px solid #BF0909;
+			    margin-right: 10px;"></span>Formato Único de Trámite - FUT<br>Control de Asistencia y Permanencia</h2>
+			    
+			<div class="row">
+				<div class="form-group col-lg-12 my-2">
+					<div class="card">
+						<div class="card-header col-lg-12"
+							style="text-align: -webkit-left; display: flex; align-items: center; background-color: #213343; color: white; background-color: #213343;">
+							<i class="fa-solid fa-file-lines"
+								style="font-size: 32px; margin-right: 20px;"></i>
+							<div>
+								<h2 style="text-align: left; margin-bottom: 0px; color: white;">
+									<b>Listado de FUT's</b>
+								</h2>
+							</div>
+							<div style="margin-left: auto;">
+								<a th:href="@{/asistencia/fut/nuevo}" class="btn btn-info"
+									role="button" title="Registrar FUT"><i
+									class="fa-solid fa-plus"></i> Registrar FUT</a>
+							</div>
+						</div>
+						<div class="card-body">
+							<div class="row">
+								
+								<div class="col-lg-1 d-flex align-items-center">
+									<label for="datepicker">Fecha FUT</label>
+								</div>
+								<div class="col-lg-5 d-flex align-items-center">
+									<input type="date" id="fechaFutInicio"
+										name="fechaFutInicio"> <label for="datepicker2"
+										style="margin-left: 3px;">al</label> <input type="date"
+										id="fechaFutFin" name="fechaFutFin"
+										style="margin-left: 3px;">
+								</div>
+								
+								<div class="col-lg-1 d-flex align-items-center">
+									<label for="label2">Oficina</label>
+								</div>
+								<div class="col-lg-5 d-flex align-items-center">
+									<select id="selectOficina" name="selectOficina"
+										class="form-control">
+										<option th:each="oficina : ${listaOficinas}"
+											th:value="${oficina.codigo}" th:text="${oficina.nombre}"></option>
+									</select>
+								</div>
+								
+							</div>
+
+							<div class="row">
+								
+								<div class="col-lg-1 d-flex align-items-center">
+									<label for="datepicker">Licencia</label>
+								</div>
+								<div class="col-lg-5 d-flex align-items-center">
+									<input type="date" id="fechaLicInicio"
+										name="fechaLicInicio"> <label for="datepicker2"
+										style="margin-left: 3px;">al</label> <input type="date"
+										id="fechaLicFin" name="fechaLicFin"
+										style="margin-left: 3px;">
+								</div>
+								
+								<div class="col-lg-1 d-flex align-items-center">
+									<label for="label2">Empleado</label>
+								</div>
+								<div class="col-lg-5 d-flex align-items-center">
+									<div class="col-lg-2" style="padding: 10px;padding-left: 0px;">
+										<input type="text" id="txtCodEmpleado" class="form-control" readonly>
+									</div>
+									<div class="col-lg-8" style="padding: 10px;right: 10px;">
+										<input type="text" id="txtEmpleado" class="form-control" readonly>
+									</div>
+									<div class="col-lg-2" style="padding: 10px;">
+										<button type="button" onclick="verBuscarEmpleados()"
+										class="btn btn-xs w3-btn w3-red" title="Buscar Empleados">
+										<i class="fas fa-search"></i>
+									</button>
+									</div>
+								</div>		
+							</div>
+							
+							<div class="row" style="margin-bottom: 10px;">
+								
+								<div class="col-lg-1 d-flex align-items-center">
+									<label for="label2">Motivo</label>
+								</div>
+								<div class="col-lg-5 d-flex align-items-center">
+									<select id="selectMotivo" name="selectMotivo"
+										class="form-control">
+										<option value="" selected>Todos</option>
+										<option th:each="motivo : ${listaMotivos}"
+											th:value="${motivo.codigo}" th:text="${motivo.nombre}"></option>
+									</select>
+								</div>
+								
+								<div class="col-lg-1 d-flex align-items-center">
+									<label for="label2">Estado</label>
+								</div>
+								
+								<div class="col-lg-2 d-flex align-items-center">
+									<select id="selectEstado" name="selectEstado"
+									class="form-control">
+										<option value="" selected>Todos</option>
+										<option th:each="estado : ${listaEstados}"
+											th:value="${estado.codigo}" th:text="${estado.nombre}"></option>
+									</select>
+								</div>
+								
+								<div class="col-lg-3 d-flex align-items-center justify-content-end">
+									<button type="button" onclick="buscarFuts()"
+										class="btn btn-xs w3-btn w3-red" title="Buscar FUT's">
+										<i class="fas fa-search"></i> Buscar
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="form-group col-lg-12 my-2">
+					<div class="card">
+					
+						<div class="card-body">		
+							<div class="card" style="border: none">
+								<div class="card-body p-0 m-0">
+		
+									<table id="tableFuts" class="table table-hover table-sm-vertical" width="100%">
+										<thead class="thead-light">
+											<tr>
+												<th class="" style="text-align: center; vertical-align: inherit; height: auto;"><b>N° FUT</b></th>
+												<th class="" style="text-align: center; vertical-align: inherit; height: auto;"><b>Empleado</b></th>
+												<th class="" style="text-align: center; vertical-align: inherit; height: auto;"><b>Oficina</b></th>
+												<th class="" style="text-align: center; vertical-align: inherit; height: auto;"><b>Licencia Desde</b></th>
+												<th class="" style="text-align: center; vertical-align: inherit; height: auto;"><b>Licencia Hasta</b></th>
+												<th class="" style="text-align: center; vertical-align: inherit; height: auto;"><b>N° Días</b></th>
+												<th class="" style="text-align: center; vertical-align: inherit; height: auto;"><b>Fec. FUT</b></th>
+												<th class="" style="text-align: center; vertical-align: inherit; height: auto;"><b>Motivo</b></th>
+												<th class="" style="text-align: center; vertical-align: inherit; height: auto;"><b>Estado</b></th>
+												<th class="" style="text-align: center; vertical-align: inherit; height: auto;"><b>Opc.</b></th>
+											</tr>
+										</thead>
+										<tbody>
+		
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer th:replace="~{fragments/layout :: footer}"></footer>
+	<input type="hidden" name="messageSystem" id="messageSystem" th:value="${messageSystem}">
+	<div class="modal fade" id="modalVerHistorial" aria-hidden="true" aria-labelledby="modalVerHistorial" tabindex="-1"></div>
+	
+	<div class="modal fade" id="modalBuscarEmpleados" aria-hidden="true" aria-labelledby=modalBuscarEmpleados tabindex="-1">
+		</div>
+	<!-- Modal de carga -->
+	<div class="modal" id="modalLoading" data-backdrop="static"
+		data-keyboard="false" tabindex="-1"
+		style="padding-right: 17px; display: none;" aria-modal="true">
+		<div class="modal-dialog modal-sm dialog-loading">
+			<div class="modal-content"
+				style="width: 48px; background-color: transparent; border: none; margin: auto; margin-bottom: 10px;">
+				<span class="loader"></span>
+			</div>
+			<h3 class="text-center" id="messageModalLoading" style="color: white">Cargando. . .</h3>
+		</div>
+	</div>
+	
+	
+</body>
+<script th:src="@{/js/jobdesk/asistencia/fut/fut.js}"> </script>
+<script>
+$(document).ready(function() {
+	configuraciones();
+	$("#item-jobdesk").addClass("active");
+});
+
+</script>
+</html>

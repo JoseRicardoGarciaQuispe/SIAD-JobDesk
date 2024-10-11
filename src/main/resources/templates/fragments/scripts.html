@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta charset="UTF-8">
+</head>
+
+<body>
+	<div th:fragment="scripts" th:remove="tag">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<!-- JQUERY -->
+		<script type="text/javascript" th:src="@{/js/jquery.js}"></script>
+<!-- 		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+<!-- <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script> -->
+		<script type="text/javascript" th:src="@{/js/jquery-cookie.js}"></script>
+		<script type="text/javascript"
+			th:src="@{/js/jquery.dataTables.min.js}"></script>
+		<script type="text/javascript"
+			th:src="@{/js/dataTables.bootstrap4.min.js}"></script>
+
+
+			
+		<!-- BOOTSTRAP -->
+		<script th:src="@{/js/popper.js}"> </script>
+		<script th:src="@{/js/bootstrap.min.js}"> </script>
+		<script th:src="@{/js/fontawesome.min.js}"> </script>
+		<script th:src="@{/js/all.js}"> </script>
+		
+		<!-- SELECT2 -->
+		<script th:src="@{/js/select2/select2.min.js}"> </script>
+		
+		<!-- PROPIOS -->
+		<script th:src="@{/js/toastr.min.js}"> </script>
+        <script th:src="@{/js/main.js}"> </script>
+        
+        
+
+		<!-- EXTRAS -->
+		<link href="https://fonts.googleapis.com/css?family=Lato|Roboto"
+			rel="stylesheet">
+		
+		<!-- PROPIOS -->
+		<link href="css/animated.css" rel="stylesheet"
+			th:href="@{/css/animated.css}">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+    	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+
+		<!-- GOBPE -->
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+			rel="stylesheet">
+		<link href="css/contact_style.css" rel="stylesheet"
+			th:href="@{/css/bootstrap.min.css}">
+		<!-- 	  	<link href="css/materialize.css" rel="stylesheet"  th:href="@{/css/materialize.css}"> -->
+		<link href="css/application-style.css" rel="stylesheet"
+			th:href="@{/css/application-style.css}">
+		<link href="css/mac_style.css" rel="stylesheet"
+			th:href="@{/css/mac_style.css}">
+		<link href="css/contact_style.css" rel="stylesheet"
+			th:href="@{/css/contact_style.css}">
+		<link href="css/contact_style.css" rel="stylesheet"
+			th:href="@{/css/wizard.css}">
+		<link href="css/contact_style.css" rel="stylesheet"
+			th:href="@{/css/select2/select2.min.css}">
+		<link href="css/fontawesome.min.css" rel="stylesheet"
+			th:href="@{/css/fontawesome.min.css}">
+		<link href="css/all.css" rel="stylesheet"
+			th:href="@{/css/all.css}">
+		<link href="css/contact_style.css" rel="stylesheet"
+			th:href="@{/css/sticky-footer-navbar.css}">
+
+		<link href="css/jquery.dataTables.min.css" rel="stylesheet"
+			th:href="@{/css/dataTables.bootstrap4.min.css}">
+			
+		<link href="css/main.css" rel="stylesheet"
+			th:href="@{/css/toastr.min.css}">
+			<link href="css/main.css" rel="stylesheet"
+			th:href="@{/css/main.css}">
+			
+		
+		
+		
+	</div>
+</body>
+</html>

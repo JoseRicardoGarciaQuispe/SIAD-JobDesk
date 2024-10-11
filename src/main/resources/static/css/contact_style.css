@@ -1,0 +1,618 @@
+@charset "utf-8";
+
+#containerContact {
+	color: black;
+	/*width: 80%;*/
+	width: 100%;
+	/*border:1px solid #000;*/
+	margin: 0 auto;
+	height: auto;
+}
+
+#frmContainer {
+	width: 90%;
+	text-align: left;
+}
+/*#frmContact {
+	width: 70%;	
+}
+*/
+#contentMessage {
+	font-size: 1.25em;
+	color: #F00;
+}
+
+#contentMessage2 {
+	font-size: 1.1em;
+	color: #F00;
+}
+
+#contentDescripStp {
+	text-align: left;
+}
+
+#contDescMsg {
+	text-align: left;
+	color: #333;
+	margin-top: 10px;
+}
+
+#contMesaParte {
+	color: #333;
+	margin-top: 6px;
+}
+
+#contentLoadSbm1 {
+	padding: 0px 8px;
+}
+
+#contentLoadSbm2 {
+	padding: 0px 8px;
+}
+
+#contentLoadSbm3 {
+	padding: 0px 8px;
+}
+
+#contentLoadSbm4 {
+	padding: 0px 8px;
+}
+
+#errmsg {
+	color: red;
+	font-size: 0.85em;
+	font-style: oblique;
+}
+
+.imgRedonda {
+	width: 120px;
+	height: 120px;
+	border-radius: 70px;
+	border: 8px solid #7e7e7e;
+	padding: 1px;
+	cursor: pointer;
+}
+
+.contIcon img {
+	width: 120px;
+	height: 120px;
+	border-radius: 70px;
+	/*border: 8px solid #7e7e7e;*/
+	border: 8px solid #84909f;
+	padding: 1px;
+	cursor: pointer;
+	filter: grayscale(20%);
+	-webkit-filter: grayscale(20%);
+}
+
+.contIcon img:hover {
+	/*border: 4px solid #727272;*/
+	border: 5px solid #6D7987;
+	padding: 1px;
+	filter: grayscale(20%);
+	-webkit-filter: grayscale(20%);
+	transition: filter 0.5s;
+	-webkit-transition: -webkit-filter 0.5s;
+	filter: grayscale(0);
+	-webkit-filter: grayscale(0);
+}
+
+.txtTitle2 {
+	font-size: 1.6em;
+	font-weight: 600;
+	color: #7b7b7b;
+	font-style: italic;
+}
+
+.tab2c {
+	padding: 2px 0
+}
+
+.rowColumn {
+	padding: 5px 8px;
+}
+
+.tab2c-col {
+	padding: 10px 8px;
+	text-align: left;
+}
+
+.tab2c-col1 {
+	padding: 10px 8px;
+	text-align: right;
+}
+
+.tab2c-col2 {
+	padding: 10px 8px;
+	text-align: left;
+}
+
+.column-left {
+	display: table-cell;
+	width: 100%;
+	text-align: left;
+}
+
+.column-right {
+	display: table-cell;
+	width: 100%;
+	text-align: right;
+}
+
+.rowColumnLoad {
+	padding: 0px 8px;
+}
+
+.rowCampoReq {
+	padding: 0px;
+	margin: 0px 10px;
+	text-align: center;
+	font-size: 12px;
+	font-style: oblique;
+	color: red;
+}
+
+.rowCampoReqAviso {
+	padding: 0px;
+	margin: 0px 10px;
+	text-align: left;
+	font-size: 15px;
+	font-style: oblique;
+	color: red;
+}
+
+.rowCampoReqAvisoCabecera {
+	padding: 0px;
+	text-align: left;
+	font-size: 16px !important;
+	font-style: oblique;
+	color: blue;
+}
+
+.stph2 {
+	margin: 0px;
+	font-size: 1.4em;
+}
+
+.path1 {
+	margin-bottom: 12px;
+	padding-left: 6px;
+}
+
+.hrS1 {
+	border: 0;
+	height: 1px;
+	background: #b4b4b4;
+	background-image: linear-gradient(to right, #b4b4b4, #8c8c8c, #b4b4b4);
+	margin: 6px 8px auto;
+}
+
+.hrfooter {
+	border-bottom: 1px dotted #777;
+	padding: 0 0 8px;
+}
+
+@media screen and (min-width: 680px) {
+	.column1 {
+		display: table-cell;
+		width: 100%;
+	}
+	.column {
+		display: table-cell;
+		width: 50%;
+	}
+	.tab2c-row {
+		display: table;
+		width: 100%;
+	}
+	.tab2c-col {
+		text-align: left;
+	}
+	/*.tab2c-col1 { text-align:left; }**/
+	.tab2c-col2 {
+		width: 50%;
+	}
+}
+
+@media screen and (max-width: 679px) {
+	.column1 {
+		display: table-cell;
+		width: 100%;
+	}
+	.column {
+		display: table-cell;
+		width: 50%;
+	}
+	.tab2c-row {
+		display: table;
+		width: 100%;
+	}
+	.tab2c-col {
+		text-align: left;
+	}
+	.tab2c-col1 {
+		text-align: left;
+	}
+	.tab2c-col2 {
+		width: 50%;
+	}
+}
+/*------------------------*/
+.underline {
+	overflow: hidden;
+	display: inline-block;
+	margin-bottom: -14px;
+	/* Value depends on your design. Fix the awkward space from overflow:hidden. */
+	font-size: 20px;
+	color: black;
+	font-weight: 300;
+}
+
+.underline:before {
+	content: "";
+	position: absolute;
+	left: -100%;
+	bottom: 0;
+	display: block;
+	width: 100%;
+	height: 1px;
+	background-color: black;
+}
+
+.underline:hover:before {
+	left: 0;
+}
+
+.txtverde {
+	color: green;
+}
+
+.txtred {
+	color: red;
+}
+
+.txtazul {
+	color: #274b98;
+}
+
+.txtambar {
+	color: #FFBF00;
+}
+
+.darkorange {
+	color: darkorange;
+}
+
+.txttitle1 {
+	font-size: 1.2em;
+	color: #c52715;
+	padding-top: 16px;
+	padding-bottom: 8px;
+	border-bottom: 1px dotted #c39075;
+	font-weight: normal;
+}
+/*------------- txt circle --------------*/
+/* Círculos de colores numerados */
+span.ambar {
+	background: #FFBF00;
+	border-radius: 0.8em;
+	-moz-border-radius: 0.8em;
+	-webkit-border-radius: 0.8em;
+	color: #ffffff;
+	display: inline-block;
+	font-weight: bold;
+	line-height: 1.6em;
+	margin-right: 15px;
+	text-align: center;
+	width: 1.6em;
+	-webkit-box-shadow: 2px 2px 8px 0px rgba(50, 50, 50, 0.75);
+	-moz-box-shadow: 2px 2px 8px 0px rgba(50, 50, 50, 0.75);
+	box-shadow: 2px 2px 8px 0px rgba(50, 50, 50, 0.75);
+}
+
+span.red {
+	background: #bf0909;
+	border-radius: 0.8em;
+	-moz-border-radius: 0.8em;
+	-webkit-border-radius: 0.8em;
+	color: #ffffff;
+	display: inline-block;
+	font-weight: bold;
+	line-height: 1.6em;
+	margin-right: 15px;
+	text-align: center;
+	width: 1.6em;
+	-webkit-box-shadow: 2px 2px 8px 0px rgba(50, 50, 50, 0.75);
+	-moz-box-shadow: 2px 2px 8px 0px rgba(50, 50, 50, 0.75);
+	box-shadow: 2px 2px 8px 0px rgba(50, 50, 50, 0.75);
+}
+
+span.green {
+	background: #5EA226;
+	border-radius: 0.8em;
+	-moz-border-radius: 0.8em;
+	-webkit-border-radius: 0.8em;
+	color: #ffffff;
+	display: inline-block;
+	font-weight: bold;
+	line-height: 1.6em;
+	margin-right: 15px;
+	text-align: center;
+	width: 1.6em;
+	-webkit-box-shadow: 2px 2px 8px 0px rgba(50, 50, 50, 0.75);
+	-moz-box-shadow: 2px 2px 8px 0px rgba(50, 50, 50, 0.75);
+	box-shadow: 2px 2px 8px 0px rgba(50, 50, 50, 0.75);
+}
+
+span.blue {
+	background: #2d54a9;
+	border-radius: 0.8em;
+	-moz-border-radius: 0.8em;
+	-webkit-border-radius: 0.8em;
+	color: #ffffff;
+	display: inline-block;
+	font-weight: bold;
+	line-height: 1.6em;
+	margin-right: 15px;
+	text-align: center;
+	width: 1.6em;
+	-webkit-box-shadow: 2px 2px 8px 0px rgba(50, 50, 50, 0.75);
+	-moz-box-shadow: 2px 2px 8px 0px rgba(50, 50, 50, 0.75);
+	box-shadow: 2px 2px 8px 0px rgba(50, 50, 50, 0.75);
+}
+
+span.grey {
+	background: #727272;
+	border-radius: 0.8em;
+	-moz-border-radius: 0.8em;
+	-webkit-border-radius: 0.8em;
+	color: #ffffff;
+	display: inline-block;
+	font-weight: bold;
+	line-height: 1.6em;
+	margin-right: 15px;
+	text-align: center;
+	width: 1.6em;
+	-webkit-box-shadow: 2px 2px 8px 0px rgba(50, 50, 50, 0.75);
+	-moz-box-shadow: 2px 2px 8px 0px rgba(50, 50, 50, 0.75);
+	box-shadow: 2px 2px 8px 0px rgba(50, 50, 50, 0.75);
+}
+/*----------- end circle -----------*/
+
+/* ========================================== */
+.msgStatus {
+	position: fixed;
+	background-color: #F9FAFB;
+	color: #545C66;
+	font-size: 18px;
+	text-align: center;
+	/*
+	width:auto;
+	height:auto;
+	*/
+	width: 100%;
+	height: 100%;
+	display: none;
+	opacity: .8;
+	filter: alpha(opacity = 80);
+}
+
+.divpreload {
+	width: 50%;
+	height: 50%;
+	/*background:#9f9;*/
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	margin: auto;
+}
+
+#contenIniAc {
+	padding: 2px 0
+}
+
+#sectionini, #section1, #section2, #asideini, #aside1, #aside2 {
+	margin: 0 0.5% 24px 0.5%;
+}
+
+#sectionini {
+	float: left;
+	width: 30%;
+	background: #e6e7e9;
+	border-radius: 6px;
+	color: #171717;
+	display: block;
+	padding: 24px 15px;
+	text-align: left;
+}
+
+#section1 {
+	float: left;
+	width: 68%;
+	background: #e6e7e9;
+	border-radius: 6px;
+	color: #171717;
+	display: block;
+	padding: 24px 15px;
+	text-align: center;
+}
+
+#section2 {
+	margin: 0 auto;
+	width: 100%;
+	background: #e6e7e9;
+	border-radius: 6px;
+	color: #171717;
+	display: block;
+	padding: 24px 15px;
+	text-align: center;
+}
+
+#asideini {
+	float: right;
+	width: 68%;
+	background: #dee1e4;
+	border-radius: 6px;
+	color: #dcdcdc;
+	display: block;
+	padding: 24px 15px;
+	text-align: center;
+}
+
+#aside1 {
+	float: right;
+	width: 30%;
+	background: #dee1e4;
+	border-radius: 6px;
+	color: #dcdcdc;
+	display: block;
+	padding: 24px 15px;
+	text-align: center;
+}
+
+#aside2 {
+	float: right;
+	width: 30%;
+	background: #dee1e4;
+	border-radius: 6px;
+	color: #dcdcdc;
+	display: block;
+	padding: 24px 15px;
+	text-align: center;
+}
+/* CSS Document */
+/* Tables
+================================== */
+.contentTab {
+	/*text-align: center;*/
+	width: 98%;
+	margin: 0px auto;
+}
+
+.Rtable {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-wrap: wrap;
+	flex-wrap: wrap;
+	margin: 0 0 10px 0;
+	padding: 0;
+}
+
+.Rtable-cell {
+	box-sizing: border-box;
+	-webkit-box-flex: 1;
+	-ms-flex-positive: 1;
+	flex-grow: 1;
+	width: 100%;
+	/* padding: 0.2em 0.6em;*/
+	overflow: hidden;
+	list-style: none;
+	/*border: solid 3px white;
+  background: rgba(112, 128, 144, 0.2);*/
+}
+
+.Rtable-cell>h1, .Rtable-cell>h2, .Rtable-cell>h3, .Rtable-cell>h4,
+	.Rtable-cell>h5, .Rtable-cell>h6 {
+	margin: 0;
+}
+/* Table column sizing
+================================== */
+.Rtable--2cols>.Rtable-cell {
+	width: 50%;
+}
+
+.Rtable--3cols>.Rtable-cell {
+	width: 33.33%;
+}
+
+.Rtable--4cols>.Rtable-cell {
+	width: 25%;
+}
+
+.Rtable--5cols>.Rtable-cell {
+	width: 20%;
+}
+
+.Rtable--6cols>.Rtable-cell {
+	width: 16.6%;
+}
+/* Apply styles
+================================== */
+.Rtable {
+	position: relative;
+	top: 3px;
+	left: 3px;
+}
+
+.Rtable-cell {
+	margin: -3px 0 0 -3px;
+	/*background-color: white;*/
+	/*border-color: #e2e6e9;*/
+}
+/* Cell styles
+================================== */
+.Rtable-cell--head {
+	/*background-color: slategrey;
+  border-color: #5a6673;*/
+	/*color: white;*/
+	
+}
+
+.Rtable-cell--head>h1, .Rtable-cell--head>h2, .Rtable-cell--head>h3,
+	.Rtable-cell--head>h4, .Rtable-cell--head>h5, .Rtable-cell--head>h6 {
+	/*color: white;*/
+	
+}
+
+.Rtable-cell--foot {
+	/*background-color: #b8c0c8;
+  border-color: #a9b3bc;*/
+	
+}
+
+.cellstyle1 {
+	text-align: right;
+	font-weight: 600;
+}
+
+.txtlabel {
+	text-align: right;
+	padding: 8px;
+}
+
+/* Responsive
+==================================== */
+@media all and (max-width: 600px) {
+	.Rtable--collapse {
+		display: block;
+	}
+	.Rtable--collapse>.Rtable-cell {
+		width: 100% !important;
+	}
+	.Rtable--collapse>.Rtable-cell--foot {
+		margin-bottom: 1em;
+	}
+	.cellstyle1 {
+		text-align: left !important;
+	}
+	.txtlabel {
+		text-align: left !important;
+		padding: 4px;
+	}
+}
+
+.no-flexbox .Rtable {
+	display: block;
+}
+
+.no-flexbox .Rtable>.Rtable-cell {
+	width: 100%;
+}
+
+.no-flexbox .Rtable>.Rtable-cell--foot {
+	margin-bottom: 1em;
+}
+/*---------------------------------------*/

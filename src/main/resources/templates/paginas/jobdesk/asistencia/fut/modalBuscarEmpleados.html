@@ -1,0 +1,41 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+	<div class="modal-content">
+		<div class="modal-header bg-dark text-white">
+			<p class="modal-title" id="exampleModalToggleLabel"
+				style="font-size: 1.25rem;">Buscar Empleados</p>
+			<button type="button" class="close text-white" data-dismiss="modal"
+				aria-label="Cerrar">
+				<span aria-hidden="true">×</span>
+			</button>
+		</div>
+		<div class="modal-body">
+	
+			<div class="card" style="border: none">
+							
+								<div class="card-body p-0 m-0">
+
+									<table id="tableEmpleados" class="table table-hover table-sm-vertical" width="100%">
+										<thead class="thead-light">
+											<tr>
+												<th class="" style="text-align: center; vertical-align: inherit; height: auto;"><b>Código</b></th>
+												<th class="" style="text-align: center; vertical-align: inherit; height: auto;"><b>Empleado</b></th>
+<!-- 												<th class="" style="text-align: center; vertical-align: inherit; height: auto;display: none;"><b>Cargo</b></th> -->
+											</tr>
+										</thead>
+										 <tbody>
+									        <tr th:each="empleado : ${listaEmpleados}">
+									            <td style="text-align: center;font-size:11px;" class="py-0" th:text="${empleado.cempCodemp}"></td>
+												<td style="text-align: center;font-size:11px;" class="py-0" th:text="${empleado.nombre}"></td>
+<!-- 												<td style="text-align: center;font-size:11px; display: none;" class="py-0" th:text="${empleado.cargo}"></td> -->
+									        </tr>
+									    </tbody>
+									</table>
+								</div>
+							</div>
+
+		</div>
+	</div>
+</div>
+<script th:src="@{/js/jobdesk/asistencia/fut/fut.js}"> </script>

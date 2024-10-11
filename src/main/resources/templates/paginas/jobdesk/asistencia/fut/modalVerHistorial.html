@@ -1,0 +1,40 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header bg-dark text-white">
+        <p class="modal-title" id="exampleModalToggleLabel" style="font-size:1.25rem;">ESTADOS - FUT</p>
+        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Cerrar">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+<!--         <h5 class="col-sm-8">Lista de flujos</h5> -->
+        <ol id="listaFirmantes" class="list-group col-sm-12">
+          <li class="list-group-item row" style="background-color: lightblue;padding-top: 5px;padding-bottom: 5px;">
+		    <div class="col-md-4 text-center">
+		      <div class="font-weight-bold text-dark">USUARIO</div>
+		    </div>
+		    <div class="col-md-4 text-center">
+		      <div class="font-weight-bold text-dark">ESTADO</div>
+		    </div>
+		    <div class="col-md-4 text-center">
+		      <div class="font-weight-bold text-dark">FECHA</div>
+		    </div>
+		  </li>
+		  <li class="list-group-item row" th:each="flujo, index : ${listaFlujos}">
+		    <div class="col-md-4 text-center">
+		      <div class="font-weight-bold text-dark" th:text="${flujo.codigoUsuario}"></div>
+		    </div>
+		    <div class="col-md-4 text-center">
+		    	<div class="badge badge-light p-2" th:text="${flujo.descripcionEstado}"></div>
+		    </div>
+		    <div class="col-md-4 text-center">
+		      <div class="text-dark" th:text="${flujo.fechaEstado}"></div>
+		    </div>
+		  </li>
+		</ol>
+      </div>
+    </div>
+  </div>
+  

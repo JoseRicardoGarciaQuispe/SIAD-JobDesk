@@ -1,0 +1,211 @@
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+</head>
+
+<body>
+    <!-- Fragmento Thymeleaf para el menú -->
+    <th:block th:fragment="menu">
+        <!-- Modal para seleccionar año, reutilizado en otras páginas -->
+        <div th:replace="~{fragments/layout :: fragmentModalAnio}"></div>
+
+        <!-- Formulario oculto para cambiar el año de ejecución -->
+        <form id="formMainAnio" method="POST" th:action="@{/inicio}">
+            <input type="hidden" name="messageAnio" id="messageAnio">
+        </form>
+
+        <!-- Contenedor principal del menú -->
+        <div class="wrapper">
+            <div id="menu">
+                <!-- Barra de navegación principal -->
+                <nav class="navbar navbar-expand-sm navbar-dark navbar-hover" style="background: #bf0909;">
+                    <!-- Botón de colapsar para pantallas pequeñas -->
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
+                        aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <!-- Título del sistema con logo -->
+                    <a class="navbar-brand mr-sm-5" href="#">
+                        <div style="display: flex; align-items: center;">
+                            <!-- Imagen del escudo del Perú -->
+                            <div class="home__logo__img_shield--small" style="padding-right: 5px!important">
+                                <img th:src="@{/images/escudo_peru.svg}" alt="SIAD" />
+                            </div>
+                            <!-- Título del sistema -->
+                            <div class="d-system-title" style="margin-left: 0.4em!important; padding-left: 0.4em!important;">
+                                <h1 style="color: white;">SIAD</h1>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Opciones del menú, visibles o colapsables según el tamaño de la pantalla -->
+                    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+                        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                            <!-- Opción de menú "Inicio" -->
+                            <li id="item-home" class="nav-item">
+                                <a class="nav-link" th:href="@{/inicio}">
+                                    <i class="fas fa-home fa-fw"></i> Inicio
+                                </a>
+                            </li>
+
+                            <!-- Menú desplegable para "Jobdesk" con varias opciones -->
+                            <li id="item-jobdesk" class="nav-item dropdown dmenu">
+                                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa-solid fa-desktop"></i> Jobdesk
+                                </a>
+
+                                <!-- Submenú para "Asistencia" con varias opciones -->
+                                <ul class="dropdown-menu caret-right">
+                                    <li>
+                                        <a class="dropdown-item dropdown-toggle" href="#">
+                                            <div class="d-flex align-items-center">
+                                                <i class="fa-solid fa-user-tie"></i>
+                                                <div class="ml-3">Asistencia</div>
+                                            </div>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <!--Opción para "Mantenimiento de Feriados"-->
+                                            <li>
+                                                <a class="dropdown-item" th:href="@{/asistencia/mantenimiento-feriado}">
+                                                    <div class="d-flex align-items-center">
+                                                        <i class="fa-solid fa-user-clock"></i>
+                                                        <div class="ml-3">Mantenimiento de Feriados</div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <!-- Opción para "Consulta de tardanzas" -->
+                                            <li>
+                                                <a class="dropdown-item" th:href="@{/asistencia/tardanzas}">
+                                                    <div class="d-flex align-items-center">
+                                                        <i class="fa-solid fa-user-clock"></i>
+                                                        <div class="ml-3">Consulta de tardanzas</div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <!-- Opción para "Consulta de saldo vacacional" -->
+                                            <li>
+                                                <a class="dropdown-item" th:href="@{/asistencia/saldo-vacacional}">
+                                                    <div class="d-flex align-items-center">
+                                                        <i class="fa-solid fa-id-card-clip"></i>
+                                                        <div class="ml-3">Consulta de saldo vacacional</div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <!-- Nuevo menú: Consulta de horas compensables -->
+                                            <li>
+                                                <a class="dropdown-item" th:href="@{/asistencia/horas-compensables}">
+                                                    <div class="d-flex align-items-center">
+                                                        <i class="fa-solid fa-hourglass"></i>
+                                                        <div class="ml-3">Consulta de horas compensables</div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <!-- Submenú para "Alimentación" -->
+                                    <li>
+                                        <a class="dropdown-item dropdown-toggle" href="#">
+                                            <div class="d-flex align-items-center">
+                                                <i class="fa-solid fa-utensils"></i>
+                                                <div class="ml-3">Alimentación</div>
+                                            </div>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <!-- Opción para "Notas de Alimentación" -->
+                                            <li>
+                                                <a class="dropdown-item" th:href="@{/alimentacion/notas-alimentos}">
+                                                    <div class="d-flex align-items-center">
+                                                        <i class="fa-solid fa-clipboard"></i>
+                                                        <div class="ml-3">Notas de Alimentación</div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <!-- Opción para "Consulta de personal con accesos" -->
+                                            <li>
+                                                <a class="dropdown-item" th:href="@{/alimentacion/acceso-alimentos}">
+                                                    <div class="d-flex align-items-center">
+                                                        <i class="fa-solid fa-user-check"></i>
+                                                        <div class="ml-3">Consulta de personal con accesos</div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <!-- Opción para "Menú" -->
+                                            <li>
+                                                <a class="dropdown-item" th:href="@{/alimentacion/menu}">
+                                                    <div class="d-flex align-items-center">
+                                                        <i class="fa-solid fa-book-open"></i>
+                                                        <div class="ml-3">Menú</div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+
+                                    <!-- Opción para "Exportar data" -->
+                                    <li>
+                                        <a class="dropdown-item" th:href="@{/exportar-data}">
+                                            <div class="d-flex align-items-center">
+                                                <i class="fa-solid fa-file-export"></i>
+                                                <div class="ml-3">Exportar data</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <!-- Información del usuario autenticado -->
+                        <div th:if="${#authorization.expression('isAuthenticated()')}" style="display: flex; align-items: center; justify-content: space-between;">
+                            <div class="user-profile" style="margin-right: 30px;">
+                                <!-- Imagen del perfil del usuario -->
+                                <img class="user-profile-img" th:src="@{/images/user.png}" alt="Icono de usuario">
+                                <div class="user-info">
+                                    <!-- Nombres del usuario autenticado -->
+                                    <span style="color: white; font-size:12px; line-height:15px" sec:authentication="principal.nombres"></span>
+                                    <!-- Nombre de usuario autenticado -->
+                                    <span style="color: white; font-size:12px; line-height:15px; font-weight: bold;" sec:authentication="principal.username"></span>
+                                </div>
+                            </div>
+
+                            <!-- Sección para mostrar el año de ejecución -->
+                            <div class="user-profile" style="margin-right: 30px; border-left: 1px solid white; padding-left: 10px;">
+                                <div class="user-info">
+                                    <span style="color: white; font-size:12px; line-height:15px">Año: 
+                                        <span title="Cambiar año de ejecución" style="color: white; font-size:12px; line-height:15px; cursor: pointer; font-weight: bold;"
+                                            sec:authentication="principal.anio" onclick="obtenerAnios()"></span>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- Botón para cerrar sesión -->
+                            <a th:href="@{/logout}" title="Cerrar sesión" style="cursor: pointer;">
+                                <i class="fas fa-power-off" style="color: #fff; width: 30px; height: 30px;"></i>
+                            </a>
+                        </div>
+
+                        <!-- Sección para usuarios no autenticados -->
+                        <div th:unless="${#authorization.expression('isAuthenticated()')}" style="display: flex; align-items: center; justify-content: space-between;">
+                            <div class="user-profile" style="margin-right: 30px;">
+                                <img class="user-profile-img" th:src="@{/images/user.png}" alt="Icono de usuario">
+                                <div class="user-info">
+                                    <span style="color: white; font-size:12px; line-height:15px">Nombres y Apellidos</span>
+                                    <span style="color: white; font-size:12px; line-height:15px; font-weight: bold;">USERDEMO</span>
+                                </div>
+                            </div>
+                            <a th:href="@{/logout}" title="Cerrar sesión" style="cursor: pointer;">
+                                <i class="fas fa-power-off" style="color: #fff; width: 30px; height: 30px;"></i>
+                            </a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </th:block>
+</body>
+</html>

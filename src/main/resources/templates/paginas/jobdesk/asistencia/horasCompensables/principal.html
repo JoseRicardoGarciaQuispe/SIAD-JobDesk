@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" 
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="~{fragments/layout :: head}"></head>
+<!-- Incluye el fragmento 'head' desde layout.html, que contiene las configuraciones generales y las referencias a archivos CSS y JS -->
+
+<body>
+
+    <!-- Incluye el menú de navegación desde el archivo menu.html -->
+    <div th:replace="~{fragments/menu :: menu}"></div>
+
+    <!-- CONTENIDO PRINCIPAL DE LA PAGINA -->
+    <div layout:fragment="content" th:remove="tag">
+        <div class="" style="margin: auto;width: 75%;">
+            <h2 style="text-align: center;padding: 20px;margin-bottom: 0px;">
+                <span style="border-left: 4px solid #BF0909; margin-right: 10px;"></span>
+                Consulta de Horas Compensables
+            </h2>
+
+            <!-- FORMULARIO PARA BUSCAR EL SALDO DE HORAS COMPENSABLES -->
+            <div class="row">
+                <div class="form-group col-lg-12 my-2">
+                    <div class="card">
+                        <div class="card-header col-lg-12"
+                             style="text-align: -webkit-left; display: flex; align-items: center; background-color: #213343; color: white;">
+                            <i class="fa-solid fa-file-lines" style="font-size: 32px; margin-right: 20px;"></i>
+                            <div>
+                                <h2 style="text-align: left; margin-bottom: 0px; color: white;">
+                                    <b>Listado de Horas Compensables</b>
+                                </h2>
+                            </div>
+                        </div>
+
+                        <!-- CUERPO DEL FORMULARIO PARA SELECCIONAR LA OFICINA Y BUSCAR EMPLEADOS -->
+                        <div class="card-body">
+                            <div class="row" style="margin-bottom: 10px;">
+                                <div class="col-lg-1 d-flex align-items-center">
+                                    <label for="selectOficina">Oficina</label>
+                                </div>
+                                <div class="col-lg-3 d-flex align-items-center">
+                                    <!-- LISTA DESPLEGABLE PARA SELECCIONAR LA OFICINA Y BUSCAR EMPLEADOS -->
+                                    <select id="selectOficina" name="selectOficina" class="form-control">
+                                        <!-- LLENADO DINAMICO CON THYMELEAF -->
+                                        <option th:each="oficina : ${listaOficinas}"
+                                                th:value="${oficina.codigo}" th:text="${oficina.nombre}">
+                                        </option>
+                                    </select>
+                                </div>
+                                <!-- SELECCIONAR ANO -->
+                                <div class="col-lg-1 d-flex align-items-center">
+									<label>Año</label>
+								</div>
+								<div class="col-lg-2 d-flex align-items-center">
+									<select id="selectAnio" name="selectAnio"
+										class="form-control" onchange="actualizarSemanas()">
+										<option th:each="anio : ${listaAnios}"
+											th:value="${anio.codigo}" th:text="${anio.codigo}"></option>
+									</select>
+								</div>                                
+
+                                <!-- SELECCIONAR MES -->
+                                <div class="col-lg-1 d-flex align-items-center">
+                                    <!-- El atributo "for" debe coincidir con el "id" del <select> -->
+                                    <label for="selectMes">Mes</label>
+                                </div>
+                                <div class="col-lg-2 d-flex align-items-center">
+                                    <select id="selectMes" name="selectMes" class="form-control">
+                                        <option value="01">Enero</option>
+                                        <option value="02">Febrero</option>
+                                        <option value="03">Marzo</option>
+                                        <option value="04">Abril</option>
+                                        <option value="05">Mayo</option>
+                                        <option value="06">Junio</option>
+                                        <option value="07">Julio</option>
+                                        <option value="08">Agosto</option>
+                                        <option value="09">Setiembre</option>
+                                        <option value="10">Octubre</option>
+                                        <option value="11">Noviembre</option>
+                                        <option value="12">Diciembre</option>
+                                    </select>
+                                </div>
+
+                                <!-- BOTON PARA REALIZAR LA BUSQUEDA -->
+                                <div class="col-lg-2 d-flex align-items-center justify-content-end">
+                                    <button type="button" onclick="buscarHorasCompensables()" 
+                                            class="btn btn-xs w3-btn w3-red" title="Buscar saldo vacacional">
+                                        <i class="fas fa-search"></i> Buscar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tabla para mostrar los resultados de las HORAS COMPENSABLES -->
+                <div class="form-group col-lg-12 my-2">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card" style="border: none">
+                                <div class="card-body p-0 m-0">
+                                    <!-- Tabla para mostrar los resultados -->
+                                    <table id="tableHorasCompensables" class="table table-hover table-sm-vertical" width="100%">
+                                        <thead class="thead-light">
+                                            <th class="" style="text-align: center; vertical-align: inherit; width: 10%;"><b>Cód. Empl.</b></th>
+                                            <th class="" style="text-align: center; vertical-align: inherit; width: 30%;"><b>Apellidos y Nombres</b></th>
+                                            <th class="" style="text-align: center; vertical-align: inherit; width: 15%;"><b>Fecha Ingreso</b></th>
+                                            <th class="" style="text-align: center; vertical-align: inherit; width: 10%;"><b>Oficina</b></th>
+                                            <th class="" style="text-align: center; vertical-align: inherit; width: 10%;"><b>Sobretiempo</b></th>
+                                            <th class="" style="text-align: center; vertical-align: inherit; width: 10%;"><b>Ejecutado</b></th>
+                                            <th class="" style="text-align: center; vertical-align: inherit; width: 15%;"><b>Saldo</b></th>
+                                            
+                                        </thead>
+                                        <tbody>
+                                            <!-- Aquí se llenarán los datos dinámicamente desde el backend -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Incluye el pie de página desde el archivo footer.html -->
+    <footer th:replace="~{fragments/layout :: footer}"></footer>
+
+    <!-- Input oculto para mensajes del sistema -->
+    <input type="hidden" name="messageSystem" id="messageSystem" th:value="${messageSystem}">
+
+    <!-- Modal de carga para mostrar mientras se obtienen los datos -->
+    <div class="modal" id="modalLoading" data-backdrop="static"
+         data-keyboard="false" tabindex="-1"
+         style="padding-right: 17px; display: none;" aria-modal="true">
+        <div class="modal-dialog modal-sm dialog-loading">
+            <div class="modal-content"
+                 style="width: 48px; background-color: transparent; border: none; margin: auto; margin-bottom: 10px;">
+                <span class="loader"></span>
+            </div>
+            <h3 class="text-center" id="messageModalLoading" style="color: white">Cargando. . .</h3>
+        </div>
+    </div>
+
+    <!-- Script para manejar las interacciones y funciones relacionadas con la consulta de saldo vacacional -->
+    <script th:src="@{/js/jobdesk/asistencia/horasCompensables/horasCompensables.js}"> </script>
+
+    <!-- Script para inicializar la configuración de la página al cargar -->
+    <script>
+        $(document).ready(function() {
+            configuraciones();  // Función que inicializa configuraciones cuando la página carga
+            $("#item-jobdesk").addClass("active");  // Marca el ítem del menú como activo
+        });
+    </script>
+</body>
+</html>

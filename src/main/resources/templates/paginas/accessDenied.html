@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="fragments/layout :: head">
+</head>
+
+<body>
+
+<!--     <header th:replace="fragments/layout :: header"></header> -->
+	<div th:replace="~{fragments/menu :: menu}"></div>
+    <div layout:fragment="content" th:remove="tag">
+        <div class="container">
+            <div class="row">
+                <div class="form-group col-lg-12 my-2">
+                    <div class="card">
+                        <div class="card-body">
+                        <div style="text-align: justify;">
+												<h4>Acceso denegado</h4>
+													<div id="msjMante">
+													<span>Estimado(a) </span><span style="font-weight:bold;" sec:authentication="principal.nombres"></span>
+														
+													</div>
+													<div><label style="font-size: 16px;" id="mensaje"
+															>Usted no tiene permiso para ver este contenido.</label></div>
+												</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer th:replace="fragments/layout :: footer"></footer>
+
+</body>
+</html>
+

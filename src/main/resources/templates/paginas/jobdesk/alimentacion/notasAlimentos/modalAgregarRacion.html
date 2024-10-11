@@ -1,0 +1,66 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div class="modal fade" id="modalRacion" aria-hidden="true" aria-labelledby=modalRacion tabindex="-1">
+	<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header bg-dark text-white">
+				<p class="modal-title" id="titleModalAgregarRacion"
+					style="font-size: 1.25rem;"></p>
+				<button type="button" class="close text-white" data-dismiss="modal"
+					aria-label="Cerrar">
+					<span aria-hidden="true">×</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<input type="hidden" name="numeroItemRacion" id="numeroItemRacion" value="">
+				<div class="form-group row">
+					<label for="tipoRacion" class="col-sm-2 col-form-label">Ración:</label>
+					<div class="col-sm-5">
+						<select class="form-control" id="selectTipoRacion">
+							<option th:each="tipoRacion : ${listaTipoRaciones}"
+												th:value="${tipoRacion.codigo}" th:text="${tipoRacion.nombre}"></option>
+						</select>
+					</div>
+					<label for="cantidadRacion"
+						class="col-sm-3 col-form-label text-right">Cantidad:</label>
+					<div class="col-sm-2">
+						<input type="number" class="form-control" id="cantidadRacion"
+							value="1" min="1" step="1" disabled>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="empleadoRacion" class="col-sm-2 col-form-label">Nombres:</label>
+					<div class="col">
+						<select class="form-control" id="selectEmpleadoRacion">
+						</select>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="observacionRacion" class="col-sm-2 col-form-label">Observ.:</label>
+					<div class="col">
+						<textarea class="form-control" id="observacionRacion" rows="3"></textarea>
+					</div>
+				</div>
+	
+				<div class="d-flex justify-content-end mt-2">
+					<button class="btn w3-btn m-2 btnEditarRacion"
+						style="color: #fff; background-color: #ea580c; border-color: #ea580c;display:none;"
+						th:onclick="editarRacion()" title="Editar Ración">
+						<i class="fa-solid fa-pen"></i> Aceptar
+					</button>
+					<button class="btn w3-btn m-2 btnAgregarRacion"
+						style="color: #fff; background-color: #007bff; border-color: #007bff;"
+						th:onclick="agregarRacion()" title="Agregar Ración">
+						<i class="fa-solid fa-plus"></i> Agregar
+					</button>
+					<div class="">
+						<button type="button" class="btn w3-btn m-2 btn-secondary btn-lg" style="background-color:#5a6268" data-dismiss="modal" aria-label="Cancelar" title="Cancelar">
+							<i class="fa-solid fa-xmark"></i> Cancelar
+						</button>
+					</div>
+				</div>
+			</div>
+	
+		</div>
+	</div>
+</div>

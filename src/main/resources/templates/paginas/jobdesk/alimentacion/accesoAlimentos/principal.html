@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="~{fragments/layout :: head}"></head>
+<link href="css/jobdesk/alimentacion/notasAlimentos.css" rel="stylesheet"
+			th:href="@{/css/jobdesk/alimentacion/notasAlimentos.css}">
+<body>
+
+	<div th:replace="~{fragments/menu :: menu}"></div>
+	<div layout:fragment="content" th:remove="tag">
+		<div class="" style="margin: auto;width: 75%;">
+			<h2 style="text-align: center;padding: 20px;margin-bottom: 0px;"><span style="
+			    border-left: 4px solid #BF0909;
+			    margin-right: 10px;"></span>Personal con Acceso a Alimentación</h2>
+			<div class="row">
+				<div class="form-group col-lg-12 my-2">
+					<div class="card">
+						<div class="card-header col-lg-12"
+							style="text-align: -webkit-left; display: flex; align-items: center; background-color: #213343; color: white; background-color: #213343;">
+							<i class="fa-solid fa-file-lines"
+								style="font-size: 32px; margin-right: 20px;"></i>
+							<div>
+								<h2 style="text-align: left; margin-bottom: 0px; color: white;">
+									<b>Listado de personal con acceso a alimentación</b>
+								</h2>
+							</div>
+						</div>
+						<div class="card-body">
+							<div class="row" style="margin-bottom: 10px;">
+								
+								<div class="col-lg-1 d-flex align-items-center">
+									<label for="datepicker">Fecha</label>
+								</div>
+								<div class="col-lg-5 d-flex align-items-center">
+									<input type="date" id="fechaInicio" name="fechaInicio"> 
+								</div>
+								
+								<div class="col-lg-1 d-flex align-items-center">
+									<label for="label2">Oficina</label>
+								</div>
+								<div class="col-lg-5 d-flex align-items-center">
+									<select id="selectOficina" name="selectOficina"
+										class="form-control">
+										<option th:each="oficina : ${listaOficinas}"
+											th:value="${oficina.codigo}" th:text="${oficina.nombre}"></option>
+									</select>
+								</div>
+								
+							</div>
+
+							<div class="row">
+								
+								<div class="col-lg-1 d-flex align-items-center">
+									<label for="label2">Empleado</label>
+								</div>
+								<div class="col-lg-5 d-flex align-items-center">
+									<input type="text" id="txtEmpleado" name="txtEmpleado" class="form-control" placeholder="buscar por nombres o apellidos">
+								</div>
+								
+								<div class="col-lg-1 d-flex align-items-center">
+									<label for="label2">Estado</label>
+								</div>
+								<div class="col-lg-2 d-flex align-items-center">
+									<select id="selectEstado" name="selectEstado"
+										class="form-control">
+										<option value="0" selected>Activo</option>
+										<option value="1">Baja</option>
+										<option value="T">Todos</option>
+									</select>
+								</div>
+								<div class="col-lg-1 d-flex align-items-center">
+									<button class="btn btn-primary btn-sm" id="btnShowLeyenda" style="border-color: rgb(76, 174, 76); margin-left: 4px; background-color:#3276b1;" 
+                                        type="button">Leyenda</button>
+								</div>
+								
+								<div class="col-lg-2 d-flex align-items-center justify-content-end">
+									<button type="button" onclick="buscarAccesoAlimentos()"
+										class="btn btn-xs w3-btn w3-red" title="Buscar acceso a alimentos">
+										<i class="fas fa-search"></i> Buscar
+									</button>
+								</div>
+								
+							</div>
+							
+						</div>
+					</div>
+				</div>
+				<div id="sectionTable" class="form-group col-lg-12 my-2">
+					<div class="card">
+					
+						<div class="card-body">							
+							
+							<div class="card" style="border: none">
+							
+								<div class="card-body p-0 m-0">
+
+									<table id="tableAccesoAlimentos" class="table table-hover table-sm-vertical" width="100%">
+										<thead class="thead-light">
+											<tr>
+												<th class="" style="text-align: center; vertical-align: inherit; height: auto;"><b>Cód. Empl.</b></th>
+												<th class="" style="text-align: center; vertical-align: inherit; height: auto;"><b>Apellidos y Nombres</b></th>
+												<th class="" style="text-align: center; vertical-align: inherit; height: auto;"><b>Oficina</b></th>
+												<th class="" style="text-align: center; vertical-align: inherit; height: auto;"><b>Fotocheck</b></th>
+												<th class="" style="text-align: center; vertical-align: inherit; height: auto;"><b>D</b></th>
+												<th class="" style="text-align: center; vertical-align: inherit; height: auto;"><b>A</b></th>
+												<th class="" style="text-align: center; vertical-align: inherit; height: auto;"><b>C</b></th>
+												<th class="" style="text-align: center; vertical-align: inherit; height: auto;"><b>Estado</b></th>
+											</tr>
+										</thead>
+										<tbody>
+
+										</tbody>
+									</table>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer th:replace="~{fragments/layout :: footer}"></footer>
+	<input type="hidden" name="messageSystem" id="messageSystem" th:value="${messageSystem}">
+	<div class="modal fade" id="modalVerFlujos" aria-hidden="true" aria-labelledby="modalVerFlujos" tabindex="-1"></div>
+	
+	<!-- Modal de carga -->
+	<div class="modal" id="modalLoading" data-backdrop="static"
+		data-keyboard="false" tabindex="-1"
+		style="padding-right: 17px; display: none;" aria-modal="true">
+		<div class="modal-dialog modal-sm dialog-loading">
+			<div class="modal-content"
+				style="width: 48px; background-color: transparent; border: none; margin: auto; margin-bottom: 10px;">
+				<span class="loader"></span>
+			</div>
+			<h3 class="text-center" id="messageModalLoading" style="color: white">Cargando. . .</h3>
+		</div>
+	</div>
+	
+	<div id="divLeyenda" class="seleccionaFecha openCachito" style="display:none;">
+        <div class="selectContent" style="background-color: white; width: 160px;">
+        	<ul>
+        		<li>
+        			<div class="d-flex">
+        				<div class='cuadrado'><img th:src="@{/images/no_autorizado.PNG}"/></div>
+        				<div class="ml-2">No autorizado</div>
+        			</div>
+        		</li>
+        		<li>
+        			<div class="d-flex">
+        				<div class='cuadrado'><img th:src="@{/images/autorizado.PNG}"/></div>
+        				<div class="ml-2">Autorizado</div>
+        			</div>
+        		</li>
+        	</ul>
+        </div>
+    </div> 
+	
+	
+</body>
+<script th:src="@{/js/jobdesk/alimentacion/accesoAlimentos.js}"> </script>
+<script>
+$(document).ready(function() {
+	configuraciones();
+	$("#item-jobdesk").addClass("active");
+});
+
+</script>
+</html>

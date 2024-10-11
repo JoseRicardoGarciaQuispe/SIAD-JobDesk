@@ -1,0 +1,23 @@
+.item-dia-menu:hover{
+	background-color: lavender;
+    cursor: pointer;
+    padding: .15rem 1.25rem;
+}
+
+.item-dia-menu-active{
+	background-color: lavender;
+}
+
+.columna-item{
+	padding-bottom: .25rem !important;
+	padding-top: .25rem !important;
+}
+
+.celda-item{
+	padding: .55rem;
+}
+
+li.list-group-item.item-dia-menu {
+    padding-bottom: .15rem !important;
+    padding-top: .15rem !important;
+}

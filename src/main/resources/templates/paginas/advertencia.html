@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/layout :: head"></head>
+
+<body>
+	<header th:replace="fragments/layout :: header"></header>
+	<header th:replace="fragments/layout :: menuAcceso"></header>
+	<div layout:fragment="content" th:remove="tag">
+		<label id="appTxt" th:text="${session.app}" hidden="hidden"></label>
+		<div class="container">
+			<div id="containerFrontpag">
+				<div class="row presidencia-container" style="margin-top: auto;">
+					<div class="col-sm-12">
+						<div class="institution__higher-official-president"
+							style="margin-bottom: 10px;">
+							<div class="container-fluid" id="grad1">
+								<div class="row justify-content-center mt-0">
+									<div class="col-12 col-sm-12 text-center p-0  mb-2">
+										<div class="card card-wizard px-0 pt-4 pb-0 mt-3 mb-3">
+											<div class="col-6" style="align-self: center;">
+												<div style="text-align: justify;">
+													<div id="msjMante">
+														<label style="font-size: 16px;" id="mensajeAdvertenciaP1"
+															th:text="${mensajeAdvertenciaP1}"></label><br>
+														<br> <label style="font-size: 16px;"
+															id="mensajeAdvertenciaP2"
+															th:text="${mensajeAdvertenciaP2}"></label><br>
+														<br> <strong><label style="font-size: 16px;"
+															id="mensajeAdvertenciaP3"
+															th:text="${mensajeAdvertenciaP3}"></label></strong><br>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<footer th:replace="fragments/layout :: footer"></footer>
+</body>
+</html>

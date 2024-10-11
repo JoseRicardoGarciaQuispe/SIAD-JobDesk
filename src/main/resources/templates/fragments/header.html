@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+	<th:block th:fragment="header">
+		<div id="divLoading" style="display: none">
+			<div class="loading-container">
+				<div class="loading"></div>
+				<div id="loading-text">Cargando</div>
+			</div>
+		</div>
+		<header class="header nav-default fixed">
+			<div class="container clearfix">
+				<div class="row subheader nav-default__wrapper">
+					<div class="col-xs-4">
+						<a class="logo" href="">
+							<div class="home__logo__img_shield--small">
+								<img alt="gob.pe" src="images/escudo_peru.svg">
+							</div>
+							<div class="home__logo__img--small">
+								<img alt="gob.pe" src="images/logo_txtgobpe.svg">
+							</div>
+						</a>
+					</div>
+					<div
+						class="col-xs-8 col-sm-6 col-sm-offset-2 col-md-4 col-md-offset-4">
+
+					</div>
+				</div>
+			</div>
+		</header>
+		<!-- 	<div class="yield"> -->
+		<!-- 	<div class="institutions-show"> -->
+		<!-- 	<div class="breadcrumb-full-width"> -->
+		<!-- 		<div class="container" style="margin-bottom:12px;"> -->
+		<!-- 			<div class="row"> -->
+		<!-- 				<div class="col-md-12"> -->
+		<!-- 					<ol class="breadcrumb"> -->
+		<!-- 						<li class="breadcrumb-item"> -->
+		<!-- 							<div class="institution__names"><h3 class="name institution__name">Presidencia de la República del Perú</h3> -->
+		<!-- 							</div> -->
+		<!-- 						</li> -->
+		<!-- 					</ol> -->
+		<!-- 				</div> -->
+		<!-- 			</div> -->
+		<!-- 		</div> -->
+		<!-- 	</div> -->
+		<!-- 	<div class="container"> -->
+		<!-- 		<div class="header institution__section-header black"><h2 class="institution__section-title header-two" id ="tituloCabecera"></h2></div> -->
+		<!-- 	</div> -->
+	</th:block>
+</body>

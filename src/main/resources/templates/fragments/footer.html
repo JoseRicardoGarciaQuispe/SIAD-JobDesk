@@ -1,0 +1,155 @@
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+	<th:block th:fragment="footer">
+		<!-- 		<footer class="institutions-show fixed-bottom"> -->
+		<!-- 			<div class="footer no-print" style="padding: 25px;"> -->
+		<!-- 				<div class="container"> -->
+		<!-- 					<div class="row"> -->
+		<!-- 						<div class="col-sm-6 col-md-5"> -->
+		<!-- 							<div class="footer__section"> -->
+		<!-- 								<h6 class="footer__heading" style="text-transform: none;font-weight: normal;">Despacho Presidencial - Derechos Reservados<br>Jr. de la Unión s/n 1era cuadra Lima, Perú</h6> -->
+		<!-- 							</div> -->
+		<!-- 						</div> -->
+		<!-- 						<div class="clearfix visible-sm"></div> -->
+		<!-- 						<div class="col-sm-6 col-md-7"> -->
+		<!-- 							<div class="row"> -->
+		<!-- 							<div class="col-xs-12 col-sm-12"> -->
+		<!-- 								<h6 class="footer__heading" style="text-transform: none;font-weight: normal;text-align: right;"> -->
+		<!--  								Central Telefónica: (511) 3113900 - (511) 3114300 - (511) 6194200 – (511) 6305600<br>  -->
+		<!--  								Trámite Documentario: (511) 3113959 - (511) 6305650<br> -->
+		<!-- 								Oficina de Atención al Ciudadano y Gestión Documentaria:<br> -->
+		<!-- 								(01) 311 3900, anexos 5980 y 5981<br> -->
+		<!-- 								atencion-ciudadano@presidencia.gob.pe -->
+		<!-- 								</h6> -->
+		<!-- 							</div> -->
+		<!-- 							</div> -->
+		<!-- 						</div> -->
+		<!-- 					</div> -->
+		<!-- 				</div> -->
+		<!-- 			</div> -->
+		<!-- 		</footer> -->
+
+		<footer class="d-footer">
+			<div class="container">
+				<div class="col-sm-6 col-md-5">
+					<div class="footer__section">
+						<h6 class="footer__heading"
+							style="text-transform: none; font-weight: normal;">
+							Despacho Presidencial - 2020 Derechos Reservados<br>Jr. de
+							la Unión s/n 1era cuadra Lima, Perú
+						</h6>
+					</div>
+				</div>
+				<div class="clearfix visible-sm"></div>
+				<div class="col-sm-6 col-md-7">
+					<div class="row">
+						<div class="col-xs-12 col-sm-12">
+							<h6 class="footer__heading"
+								style="text-transform: none; font-weight: normal; text-align: right;">
+								Oficina de Recursos Humanos<br> (01) 311 3900, anexos 5980
+								y 5981<br> atencion-ciudadano@presidencia.gob.pe
+							</h6>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+		<div class="modal fade bd-example-modal-lg" id="ModalImportante"
+			role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-lg modal-dialog-scrollable"
+				role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h6 class="modal-title" id="exampleModalLabel">
+							<span id="titulo" th:text="#{text.modal.termino.titulo}"></span>
+						</h6>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true" style="color: #5990e0">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body contentTerminos" style="max-height: 750px;">
+						<p>Mediante el uso del presente Módulo, los/as ciudadanos/as y
+							personas jurídicas públicas y privadas tienen la opción de
+							generar de manera virtual, desde cualquier punto del país, las 24
+							horas del día y durante los 365 días del año la presentación de
+							documentos electrónicos dirigidos al Despacho Presidencial, sin
+							la necesidad de acercarse para tal fin a nuestra MESA DE PARTES
+							INSTITUCIONAL.</p>
+						<p>Este Módulo se ha implementado como una solución que
+							permita la comunicación efectiva con el DESPACHO PRESIDENCIAL
+							durante la vigencia del estado de emergencia que afronta el país,
+							flexibilizándose formalidades con el uso de tecnologías que se
+							encuentren al alcance de la mayoría, alineadas a las
+							disposiciones del Texto Único de la Ley 27444 y al Modelo de
+							Gestión Documental del DESPACHO PRESIDENCIAL.</p>
+						<p>
+							Antes de iniciar alguna transacción por este Módulo, le
+							recomendamos revisar previamente nuestro Texto Único de
+							Procedimientos Administrativos - TUPA y nuestro portal
+							institucional accediendo a <a
+								href="https://www.gob.pe/presidencia" target="_blank">https://www.gob.pe/presidencia</a>
+						</p>
+						<p>De darse el caso que la pretensión indicada en el documento
+							electrónico remitido, no pueda atenderse por adolecer de algún
+							vicio, no cumplir con los requisitos de formalidad o algún tipo
+							de imposibilidad de atención por razones vinculadas al estado de
+							emergencia, esto será informado al solicitante.</p>
+						<p>Los documentos electrónicos que se presenten deberán
+							contener todos los datos de identificación de quien los suscriba;
+							además deben estar firmados ya sea con una simple firma
+							electrónica escaneada o una firma digital que utilice
+							certificados digitales vigentes. Es indispensable que se deje un
+							espacio o margen mínimo de 10 centímetros al final del documento,
+							libre de texto o imagen, puesto que en dicho espacio se incluirá
+							el sello de recepción y la firma digital del personal de Mesa de
+							Partes del DESPACHO PRESIDENCIAL, lo cual se visualizará una vez
+							se comunique la recepción del documento.</p>
+						<p>La Mesa de Partes del DESPACHO PRESIDENCIAL actuará como
+							Sede Electrónica, procediendo a recibir los documentos con las
+							formalidades pertinentes, dentro de su horario regular de lunes a
+							viernes de 9:00 a.m. a 17:00 p.m., los documentos ingresados a
+							través del Módulo serán derivados al área competente que evaluará
+							su atención. A partir de la recepción del documento, empezará a
+							computarse el plazo legal con el que cuenta la Entidad para
+							brindar la respuesta a su documento. Es importante mencionar que
+							los plazos de atención pueden verse afectados por el actual
+							estado de emergencia.</p>
+						<p>El/la ciudadano/a o presentante del documento de manera
+							obligatoria debe consignar una dirección de correo electrónico
+							donde será comunicada la recepción del documento.</p>
+						<p>Con la aceptación de los TERMINOS Y CONDICIONES, se
+							autoriza expresamente al DESPACHO PRESIDENCIAL para que le
+							comunique vía el correo electrónico señalado la respuesta
+							pertinente; comprometiéndose a descargar desde el link incluido
+							en dicha comunicación, el documento electrónico que contenga la
+							respuesta; dicha acción constituirá el único medio de acuse de
+							recepción pertinente y con ello se dará por concluida la
+							atención.</p>
+						<p>El ciudadano se hace responsable del seguimiento del estado
+							de su documento a través del Módulo. Toda comunicación adicional
+							por parte de la entidad para la atención del documento presentado
+							se efectuará vía correo electrónico consignado.</p>
+						<br> <br>
+					</div>
+
+					<div class="modal-footer" style="border-top: none">
+						<button type="button" class="action-button w3-btn w3-red"
+							data-dismiss="modal">
+							<i class="fas fa-sign-out-alt"></i>Cerrar
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</th:block>
+</body>

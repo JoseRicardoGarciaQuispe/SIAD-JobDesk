@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+
+<head th:fragment="head">
+    <!-- Título de la página -->
+    <title>SIAD | Sistema Integrado de Apoyo Administrativo</title>
+    
+    <!-- Metadatos básicos -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+    <!-- Importa el archivo de scripts desde fragments/scripts -->
+    <head th:replace="~{fragments/scripts :: scripts}" />
+    
+    <!-- Favicon para la página -->
+    <link rel="shortcut icon" sizes="32x32" type="image/png" th:href="@{/images/favicon-32x32.png}" />
+</head>
+
+<body style="background-color: transparent">
+    <!-- Cabecera fija de la página -->
+    <header th:fragment="header" class="header fixed d-system-header">
+        <div class="container d-system-header-logo">
+            <!-- Logo del escudo de Perú -->
+            <div class="home__logo__img_shield--small">
+                <img th:src="@{/images/escudo_peru.svg}" alt="Escudo de Perú" />
+            </div>
+            <!-- Título del sistema -->
+            <div class="d-system-title">
+                <h1 style="color: white;">SIAD</h1>
+            </div>
+        </div>
+    </header>
+
+    <!-- Menú de navegación principal -->
+    <div th:fragment="menu">
+        <div class="d-system-menu">
+            <div class="container">
+                <nav class="navbar navbar-expand-lg navbar-dark">
+                    <!-- Botón para colapsar el menú en pantallas pequeñas -->
+                    <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <!-- Lista de opciones del menú -->
+                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                        <ul class="navbar-nav">
+                            <!-- Opción de inicio -->
+                            <li class="nav-item active">
+                                <a class="nav-link" href="/appnotificaciondedocumento/">
+                                    <i class="fas fa-home fa-fw"></i> Inicio <span class="sr-only">(current)</span>
+                                </a>
+                            </li>
+                            <!-- Opción dinámica para el nombre de la aplicación -->
+                            <li class="nav-item">
+                                <a class="nav-link" th:text="#{text.aplicativo.nombre}" style="color: white; font-size: 18px;"></a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para cambiar el año (se reutiliza en diferentes vistas) -->
+    <div th:fragment="fragmentModalAnio" class="modal fade" id="aniosModal" tabindex="-1" role="dialog"
+        aria-labelledby="aniosModalLabel" aria-hidden="true" style="padding-right: 17px;">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header bg-dark text-white">
+                    <!-- Título del modal -->
+                    <p class="modal-title" id="exampleModalToggleLabel" style="font-size: 1.25rem;">Cambiar año</p>
+                    <!-- Botón para cerrar el modal -->
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Cerrar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <!-- Cuerpo del modal que muestra los años disponibles -->
+                <div class="modal-body p-3">
+                    <div class="mb-3">
+                        <span>Seleccionar el año de ejecución disponible:</span>
+                    </div>
+                    <div id="listaAniosDisponibles" class="mb-3"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mensajes de alertas dinámicas -->
+    <div class="alert alert-success" th:if="${success != null}" th:text="${success}"></div>
+    <div class="alert alert-danger" th:if="${error != null}" th:text="${error}"></div>
+    <div class="alert alert-warning" th:if="${warning != null}" th:text="${warning}"></div>
+    <div class="alert alert-info" th:if="${info != null}" th:text="${info}"></div>
+
+    <!-- Contenido principal de la página -->
+    <div class="yield">
+        <div class="institutions-show">
+            <div class="container"></div>
+
+            <!-- Pie de página -->
+            <footer class="footer" th:fragment="footer" style="display: flex; align-items: center;">
+                <div class="container" style="text-align: center;">
+                    <!-- Información de contacto -->
+                    <div class="col-sm-12 col-md-12 my-0">
+                        <div class="footer__section">
+                            <h6 class="footer__heading" style="text-transform: none; font-weight: normal; margin-bottom: 0px;">
+                                Despacho Presidencial - <span th:text="${#dates.year(new java.util.Date())}"></span> Derechos Reservados<br>
+                                Jr. de la Unión s/n 1era cuadra Lima, Perú
+                            </h6>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+</body>
+</html>

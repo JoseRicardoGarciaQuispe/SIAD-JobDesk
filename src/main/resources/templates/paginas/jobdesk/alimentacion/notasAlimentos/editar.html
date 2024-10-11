@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/layout :: head}"></head>
+<body>
+
+	<div th:replace="~{fragments/menu :: menu}"></div>
+	<div layout:fragment="content" th:remove="tag">
+		<div class="container">
+			<h2 style="text-align: center; padding: 20px; margin-bottom: 0px;">
+				<span style="border-left: 4px solid #BF0909; margin-right: 10px;"></span>Notas
+				de Alimentos - Atención
+			</h2>
+			<div class="row">
+				<div class="form-group col-lg-12 my-2">
+					<div class="card">
+						<div class="card-header col-lg-12"
+							style="text-align: -webkit-left; display: flex; align-items: center; background-color: #213343; color: white; background-color: #213343;">
+							<i class="fa-solid fa-file-pen"
+								style="font-size: 32px; margin-right: 20px;"></i>
+							<div>
+								<h2 style="text-align: left; margin-bottom: 0px; color: white;">
+									<b>Editar Nota</b>
+								</h2>
+								<span>Modificar nota de alimentos y/o excepcional</span>
+							</div>
+						</div>
+						<div id="fragmentContainerRegistro" class="card-body">
+							<div class="col-lg-12">
+								<form id="formMain" method="POST"
+									th:action="@{/alimentacion/notas-alimentos}">
+									<input type="hidden" name="message" id="message">
+								</form>
+								<div class="form-group row">
+									<input type="hidden" name="anioSolicitud" id="anioSolicitud" th:value="${notaAlimento.canoAnosol}">
+									<input type="hidden" name="tipoDocumentoSolicitud" id="tipoDocumentoSolicitud" th:value="${notaAlimento.cdocTipdoc}">
+									<input type="hidden" name="numeroSolicitud" id="numeroSolicitud" th:value="${notaAlimento.csolNumsol}">
+									<input type="hidden" name="tipoTransaccion" id="tipoTransaccion" value="EDITAR">
+							  	</div>
+								<div class="form-group row">
+									<div class="form-group row col-sm-12 mb-0">
+										<div class="form-group row col-sm-7 mb-0">
+											<div class="form-group row col-sm-12">
+												<label for="txtNumeroSolicitud"
+													class="col-sm-2 col-form-label">Estado</label>
+												<div class="col-sm-3 d-flex align-items-center">
+													<span id="spanEstadoNota" class="badge" th:text="${notaAlimento.estado}" style="font-size: 12px;line-height: 2;color: #fff;background-color: #6366f1;font-weight: 500;"></span>
+												</div>
+											</div>
+										</div>
+										<div class="form-group row col-sm-5 mb-0">
+											<div class="form-group row col-sm-12">
+												<label for="datepicker" class="col-sm-4 col-form-label">Acciones</label>
+												<div class="col">
+													<button id="btnAnularNota" class="btn btn-xs btn-outline-danger eliminarRacion" data-toggle="modal" data-target="#confirmDeleteModal"
+														title="Anular Nota" th:if="${notaAlimento.csolEstado == '01'}">
+														<i class="fas fa-trash"></i> Anular
+													</button>
+													<button id="btnAprobarNota" class="btn btn-xs btn-outline-primary primary-button" data-toggle="modal" data-target="#confirmApproveModal"
+														title="Aprobar Nota" th:if="${notaAlimento.csolEstado == '01' and esAprobador == '1'}">
+														<i class="fa-solid fa-check"></i> Aprobar
+													</button>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="form-group row col-sm-12 mb-0">
+										<div class="form-group row col-sm-7 mb-0">
+											<div class="form-group row col-sm-12">
+												<label for="txtNumeroSolicitud"
+													class="col-sm-2 col-form-label">Número</label>
+												<div class="col-sm-3 d-flex align-items-center">
+													<input type="text" class="form-control"
+														id="txtNumeroSolicitud" disabled th:value="${notaAlimento.csolNumsol}">
+												</div>
+												<label for="datepicker"
+													class="col-sm-2 col-form-label text-right">Fecha</label>
+												<div class="col">
+													<input type="date" id="fechaSolicitud" name="fechaSolicitud"
+														class="form-control" th:value="${notaAlimento.dsolFecsol}" th:if="${notaAlimento.csolEstado == '01'}" disabled>
+													<input type="date" id="fechaSolicitud" name="fechaSolicitud"
+														class="form-control" th:value="${notaAlimento.dsolFecsol}" th:if="${notaAlimento.csolEstado != '01'}" disabled>
+												</div>
+											</div>
+											<div class="form-group row col-sm-12">
+												<label for="oficinaSolicitud"
+													class="col-sm-2 col-form-label">Oficina</label>
+												<div class="col">
+													<select class="form-control" id="oficinaSolicitud" disabled>
+														<option th:each="oficina : ${listaOficinas}"
+															th:value="${oficina.codigo}" th:text="${oficina.nombre}" th:selected="${oficina.codigo == notaAlimento.cofiCodofi}"></option>
+													</select>
+												</div>
+											</div>
+										</div>
+										<div class="form-group row col-sm-5 mb-0">
+											<div class="form-group row col-sm-12">
+												<label for="datepicker" class="col-sm-4 col-form-label">Inicio</label>
+												<div class="col">
+													<input type="date" id="fechaInicioSolicitud" name="fechaInicioSolicitud"
+														class="form-control" th:value="${notaAlimento.dsolFecini}" th:if="${notaAlimento.csolEstado == '01'}">
+													<input type="date" id="fechaInicioSolicitud" name="fechaInicioSolicitud"
+														class="form-control" th:value="${notaAlimento.dsolFecini}" th:if="${notaAlimento.csolEstado != '01'}" disabled>
+												</div>
+											</div>
+											<div class="form-group row col-sm-12">
+												<label for="datepicker" class="col-sm-4 col-form-label">Fin</label>
+												<div class="col">
+													<input type="date" id="fechaFinSolicitud" name="fechaFinSolicitud"
+														class="form-control" th:value="${notaAlimento.dsolFecfin}" th:if="${notaAlimento.csolEstado == '01'}">
+													<input type="date" id="fechaFinSolicitud" name="fechaFinSolicitud"
+														class="form-control" th:value="${notaAlimento.dsolFecfin}" th:if="${notaAlimento.csolEstado != '01'}" disabled>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="form-group row col-sm-12 mb-0">
+										<div class="form-group row col-sm-7 mb-0">
+											<div class="form-group row col-sm-12">
+												<label for="txtNumeroSolicitud"
+													class="col-sm-2 col-form-label">Observ.</label>
+												<div class="col d-flex align-items-center">
+													<textarea class="form-control"
+														id="observacionSolicitud" rows="1" th:field="${notaAlimento.csolObssol}" th:if="${notaAlimento.csolEstado == '01'}"></textarea>
+													<textarea class="form-control"
+														id="observacionSolicitud" rows="1" th:field="${notaAlimento.csolObssol}" th:if="${notaAlimento.csolEstado != '01'}" disabled></textarea>
+												</div>
+											</div>
+										</div>
+										<div class="form-group row col-sm-5 mb-0">
+											<div class="form-group row col-sm-12">
+												<label for="datepicker" class="col-sm-4 col-form-label">Opciones</label>
+												<div class="col">
+													<a th:href="${'/siad/alimentacion/notas-alimentos/nuevo/' + notaAlimento.canoAnosol + '-' + notaAlimento.cdocTipdoc + '-' + notaAlimento.csolNumsol}"
+														class="btn btn-xs btn-outline-primary purple-button" title="Generar Nueva Nota">
+														<i class="fas fa-copy"></i> Copiar
+													</a>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="form-group row col-sm-12 mb-0">
+										<div class="form-group row col-sm-7 mb-0">
+											<div class="form-group row col-sm-12">
+												<label for="apoyoSolicitud" class="col-sm-2 col-form-label">Apoyo</label>
+												<div class="col-sm-2 d-flex align-items-center">
+													<input type="checkbox" class="form-control" th:if="${notaAlimento.csolIndapo == '1'}" id="apoyoSolicitud" style="width: 20px;" checked disabled>
+												    <input type="checkbox" class="form-control" th:if="${notaAlimento.csolIndapo == '0'}" id="apoyoSolicitud" style="width: 20px;" disabled>
+												</div>
+												<label for="motivoSolicitud" class="col-sm-2 col-form-label">Motivo</label>
+												<div class="col d-flex align-items-center">
+													<select class="form-control" id="motivoSolicitud" disabled>
+														<option value="">Seleccionar..</option>
+														<option th:each="motivo : ${listaMotivos}"
+															th:value="${motivo.codigo}" th:text="${motivo.nombre}" th:selected="${motivo.codigo == notaAlimento.ssolMotivo}"></option>
+													</select>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="form-group row col-sm-12 mb-0">
+										<div class="form-group row col-sm-10 mb-0">
+											<div class="form-group row col-sm-12">
+												<div class="form-group row col-sm-2">
+													<label for="procedenciaSolicitud" class="col-sm-12 col-form-label pr-0" style="font-size:12px;">Procedencia</label>
+												</div>
+												<div class="form-group row col-sm-10 pl-0">
+													<div class="col d-flex align-items-center">
+														<textarea class="form-control"
+															id="procedenciaSolicitud" rows="1" th:field="${notaAlimento.csolProce}" th:if="${notaAlimento.csolEstado == '01'}"></textarea>
+														<textarea class="form-control"
+															id="procedenciaSolicitud" rows="1" th:field="${notaAlimento.csolProce}" th:if="${notaAlimento.csolEstado != '01'}" disabled></textarea>
+													</div>
+												</div>
+												
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="card" style="border: none">
+									<div class="card-header bg-dark text-white col-lg-12 d-flex align-items-center justify-content-between">
+										<div style="text-align: -webkit-left">Listado de Raciones</div>
+										<button type="button" id="btnModalAgregarRacion"
+											th:onclick="verAgregarRacion()" class="btn btn-info"
+											role="button" title="Agregar ración" th:if="${notaAlimento.csolEstado == '01'}">
+											<i class="fa-solid fa-plus"></i> Agregar
+										</button>
+									</div>
+									<div class="card-body p-0 m-0">
+										
+										<!-- Tabla de Raciones -->
+
+										<table id="tableRaciones"
+											class="table table-hover table-sm-vertical" width="100%">
+											<thead class="thead-light">
+												<tr>
+													<th style="text-align: center;display:none"><b></b></th>
+													<th style="text-align: center;display:none"><b></b></th>
+													<th class="py-0" style="text-align: center; vertical-align: inherit; height: auto;"><b>Ración</b></th>
+													<th th:if="${notaAlimento.csolIndapo == '0'}" class="py-0" style="text-align: center; vertical-align: inherit; height: auto;"><b>Cód. Empl.</b></th>
+													<th th:if="${notaAlimento.csolIndapo == '1'}" class="py-0" style="text-align: center; vertical-align: inherit; height: auto;"><b>Cód. Apoyo</b></th>
+													<th class="py-0" style="text-align: center; vertical-align: inherit; height: auto;"><b>Apellidos y Nombres</b></th>
+													<th class="py-0" style="text-align: center; vertical-align: inherit; height: auto;"><b>Fotocheck</b></th>
+													<th class="py-0" style="text-align: center; vertical-align: inherit; height: auto;"><b>Cantidad</b></th>
+													<th class="py-0" style="text-align: center; vertical-align: inherit; height: auto;"><b>Observación</b></th>
+													<th class="py-0" style="text-align: center; vertical-align: inherit; height: auto;"><b>Opciones</b></th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr th:each="racion : ${notaAlimento.items}">
+													<td style="text-align: center;display:none;" th:text="${racion.nsodItem}"></td>
+													<td style="text-align: center;display:none;" th:text="${racion.chorCodtipo}"></td>
+													<td style="text-align: center;font-size:13px;" class="py-0" th:text="${racion.descripcionRacion}"></td>
+													<td th:if="${notaAlimento.csolIndapo == '0'}" style="text-align: center;font-size:13px;" class="py-0" th:text="${racion.cempCodemp}"></td>
+													<td th:if="${notaAlimento.csolIndapo == '1'}" style="text-align: center;font-size:13px;" class="py-0" th:text="${racion.capoCodapo}"></td>
+													<td style="text-align: center;font-size:13px;" class="py-0" th:text="${racion.nombres}"></td>
+													<td style="text-align: center;font-size:13px;" class="py-0" th:text="${racion.fotocheck}"></td>
+													<td style="text-align: center;font-size:13px;" class="py-0" th:text="${racion.nsodCanper}"></td>
+													<td style="text-align: center;font-size:13px;" class="py-0" th:text="${racion.csodSodobs}"></td>
+													<td style="text-align: center;font-size:12px;">
+														<button class="btn btn-xs btn-outline-primary orange-button editarRacion mr-1" title="Editar ración" th:if="${notaAlimento.csolEstado == '01'}">
+															<i class="fa-solid fa-pen"></i>
+														</button>
+														<button class="btn btn-xs btn-outline-danger eliminarRacion" title="Quitar ración" th:if="${notaAlimento.csolEstado == '01'}">
+															<i class="fa-solid fa-xmark"></i>
+														</button>
+													</td>
+												</tr>
+												
+											</tbody>
+										</table>
+
+										<!-- Tabla de Raciones -->
+									</div>
+								</div>
+
+
+								<div class="mt-5 d-flex justify-content-between">
+									<div>
+										<a th:href="@{/alimentacion/notas-alimentos}"
+										class="btn btn-warning" role="button" title="Regresar"><i
+										class="fas fa-arrow-left"></i> Atrás</a>
+									</div>
+									<div class="d-flex justify-content-end">
+										<button id="btnGuardarNotaEditar" type="button" onclick="editarNotaAlimento()"
+											title="Guardar cambios" class="btn w3-btn w3-teal"
+											style="color: #fff;" th:if="${notaAlimento.csolEstado == '01'}">
+											<i class="fa-solid fa-save"></i> Guardar
+										</button>
+									</div>
+									
+									
+								</div>
+
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer th:replace="~{fragments/layout :: footer}"></footer>
+
+	<div th:replace="paginas/jobdesk/alimentacion/notasAlimentos/modalAgregarRacion :: div"></div>
+
+	<!-- Modal de carga -->
+	<div class="modal" id="modalLoading" data-backdrop="static"
+		data-keyboard="false" tabindex="-1"
+		style="padding-right: 17px; display: none;" aria-modal="true">
+		<div class="modal-dialog modal-sm dialog-loading">
+			<div class="modal-content"
+				style="width: 48px; background-color: transparent; border: none; margin: auto; margin-bottom: 10px;">
+				<span class="loader"></span>
+			</div>
+			<h3 id="messageModalLoading" style="color: white">Cargando . . .</h3>
+		</div>
+	</div>
+	
+	<!-- Modal de confirmación Anulacion -->
+	<div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel"
+	     aria-hidden="true">
+	    <div class="modal-dialog" role="document">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmar Anulación</h5>
+	                <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+	                    <span aria-hidden="true">&times;</span>
+	                </button>
+	            </div>
+	            <div class="modal-body">
+	                <p>¿Está seguro que desea <b>ANULAR</b> la nota?</p>
+	            </div>
+	            <div class="modal-footer">
+	            	<button type="button" class="btn btn-danger delete-confirm-button">Anular</button>
+	                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+	
+	<!-- Modal de confirmación Aprobacion -->
+	<div class="modal fade" id="confirmApproveModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel"
+	     aria-hidden="true">
+	    <div class="modal-dialog" role="document">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <h5 class="modal-title" id="confirmApproveModalLabel">Confirmar Aprobación</h5>
+	                <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+	                    <span aria-hidden="true">&times;</span>
+	                </button>
+	            </div>
+	            <div class="modal-body">
+	                <p>¿Está seguro que desea <b>APROBAR</b> la nota?</p>
+	            </div>
+	            <div class="modal-footer">
+	            	<button type="button" class="btn w3-btn approve-confirm-button" style="color: #fff; background-color: #007bff; border-color: #007bff;">Aprobar</button>
+	                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+
+</body>
+<script th:src="@{/js/jobdesk/alimentacion/notasAlimentos.js}"> </script>
+<script>
+$(document).ready(function() {
+	configuracionesEditar();
+	$("#item-jobdesk").addClass("active");
+});
+</script>
+
+</html>
+
+

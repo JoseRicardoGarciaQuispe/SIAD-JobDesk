@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+>
+
+<head th:replace="fragments/layout :: head">
+</head>
+
+<body>
+
+<!--     <header th:replace="fragments/layout :: header"></header> -->
+    <div th:replace="~{fragments/menu :: menu}"></div>
+    <div layout:fragment="content" th:remove="tag">
+        <div class="container">
+            <div class="row">
+                <div class="form-group col-lg-12 my-2">
+                    <div class="card">
+                        <div class="card-body">
+	                        <div style="text-align: center;">
+								<img class="error-img" style="width: 250px" th:src="@{/images/error.png}" alt="Ocurrio un error">
+								<div><label style="font-size: 13px;" id="mensaje" th:text="${mensajeError}"></label></div>
+							</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer th:replace="fragments/layout :: footer"></footer>
+
+</body>
+</html>
+

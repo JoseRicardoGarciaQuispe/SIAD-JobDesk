@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/layout :: head}">
+
+</head>
+<link href="css/login.css" rel="stylesheet"
+			th:href="@{/css/principal.css}">
+<body>
+
+	<div th:replace="~{fragments/menu :: menu}"></div>
+	<div layout:fragment="content" th:remove="tag">
+		<div class="container-principal" style="margin: 15vh auto;width: 75%;height: 60vh;">
+			<div class="form-container sign-in">
+	        </div>
+	        <div class="toggle-container">
+	            <div class="toggle">
+	            	
+					<div class="toggle-panel toggle-right">
+						<div class="d-flex justify-content-center align-items-center">
+							<div class="" style="border-right: 2px solid white;padding-right: 10px;margin-right: 10px;">
+								<img th:src="@{/images/escudo_peru.svg}" alt="Spring logo" style="width: 66px;"/>
+							</div>
+							<h1 style="color: white;">SIAD</h1>
+						</div>
+						<p>Sistema Integrado de Apoyo Administrativo</p>
+						<div class="d-flex justify-content-center align-items-center">
+							<h4 style="color: white;">JOBDESK</h4>
+						</div>
+					</div>
+	            </div>
+	        </div>
+		</div>
+
+		
+	</div>
+
+	<footer th:replace="~{fragments/layout :: footer}"></footer>
+	<input type="hidden" name="messageError" id="messageError" th:value="${error}">
+	<input type="hidden" name="messageSuccess" id="messageSuccess" th:value="${success}">
+	<input type="hidden" name="messageInfo" id="messageInfo" th:value="${info}">
+	<input type="hidden" name="messageWarning" id="messageWarning" th:value="${warning}">
+</body>
+<script>
+$(document).ready(function() {
+	$("#item-home").addClass("active");
+});
+
+</script>
+</html>

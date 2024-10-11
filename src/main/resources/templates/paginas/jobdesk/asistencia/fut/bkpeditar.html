@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/layout :: head}"></head>
+<body>
+
+	<div th:replace="~{fragments/menu :: menu}"></div>
+	<div layout:fragment="content" th:remove="tag">
+		<div class="container">
+			<h2 style="text-align: center; padding: 20px; margin-bottom: 0px;">
+				<span style="border-left: 4px solid #BF0909; margin-right: 10px;"></span>Formato Único de Trámite - FUT<br>Control de Asistencia y Permanencia</h2>
+			<div class="row">
+				<div class="form-group col-lg-12 my-2">
+					<div class="card">
+						<div class="card-header col-lg-12"
+							style="text-align: -webkit-left; display: flex; align-items: center; background-color: #213343; color: white; background-color: #213343;">
+							<i class="fa-solid fa-file-circle-plus"
+								style="font-size: 32px; margin-right: 20px;"></i>
+							<div>
+								<h2 style="text-align: left; margin-bottom: 0px; color: white;">
+									<b>Editar FUT</b>
+								</h2>						
+							</div>
+						</div>
+						<div class="card-body" style="padding-bottom: 0px;">
+							<div class="col-lg-12">
+								<form id="formMain" method="POST"
+									th:action="@{/asistencia/fut}">
+									<input type="hidden" name="message" id="message">
+								</form>
+								<div class="form-group row">
+									<div class="form-group row col-sm-8 mb-0">
+										
+											<div class="form-group row col-sm-12">
+												<label for="txtNumeroSolicitud" class="col-sm-2 col-form-label">Número</label>
+												<div class="col-sm-3 d-flex align-items-center">
+													<input type="text" class="form-control" id="txtNumeroSolicitud" disabled>
+												</div>
+												<label for="datepicker"
+													class="col-sm-2 col-form-label text-right">Fecha</label>
+												<div class="col">
+													<input type="date" id="fechaSolicitud" name="fechaSolicitud" class="form-control"
+														th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}">
+												</div>
+											</div>
+										
+																				
+										<div class="form-group row col-sm-12">
+											<label for="oficinaSolicitud" class="col-sm-2 col-form-label">Oficina</label>
+											<div class="col">
+												<select class="form-control" id="oficinaSolicitud">
+													<option value="" selected>Seleccionar...</option>
+													<option th:each="oficina : ${listaOficinas}"
+														th:value="${oficina.codigo}" th:text="${oficina.nombre}"></option>
+												</select>
+											</div>
+										</div>
+										
+										<div class="form-group row col-sm-12">
+											<label for="txtCodEmpleado" class="col-sm-2 col-form-label">Empleado</label>											
+											<div class="col-sm-3">
+												<input type="text" id="txtCodEmpleado" class="form-control" placeholder="CodEmp">
+											</div>
+											<div class="col-sm-7" >
+												<input type="text" id="txtEmpleado" class="form-control" placeholder="Nombre Empleado">
+											</div>
+										</div>	
+										
+										<div class="form-group row col-sm-12">
+											<label for="txtCargo" class="col-sm-2 col-form-label">Cargo</label>											
+											<div class="col-sm-10">
+												<input type="text" id="txtCargo" class="form-control" placeholder="Cargo">
+											</div>
+										</div>		
+									</div>
+									<div class="form-group row col-sm-4 mb-0">
+										<label for="txtEstado" class="col-sm-4 col-form-label">Estado</label>
+											<div class="col-sm-8 d-flex">
+												<input type="text" class="form-control" id="txtEstado" disabled>
+											</div>
+										</div>
+									</div>
+								</div>
+					
+					<div class="col-lg-12" style="padding: 20px;top: 10px;">
+								<form id="formMain" method="POST" th:action="@{/asistencia/fut}">
+									<input type="hidden" name="message" id="message">
+								</form>
+								<div class="form-group row" style="margin-bottom: 0px;">
+									<div class="form-group row col-sm-6 mb-0">										
+																				
+										<div class="form-group row col-sm-12" style="margin-bottom: 0px;">
+											<label for="motivoSolicitud" class="col-sm-2 col-form-label">Motivo</label>
+										</div>
+										
+										<div class="form-group row col-sm-12">
+											<div class="col">
+												<select class="form-control" id="motivoSolicitud">
+													<option value="" selected>Seleccionar...</option>
+													<option th:each="motivo : ${listaMotivos}"
+														th:value="${motivo.codigo}" th:text="${motivo.nombre}"></option>
+												</select>
+											</div>
+										</div>	
+										
+										<div class="form-group row col-sm-12">
+											<label for="txtCargo" class="col-sm-12 col-form-label">Descripción según motivo</label>											
+										</div>		
+									</div>
+									<div class="form-group row col-sm-6 mb-0">
+										<div class="form-group row col-sm-12" style="margin-bottom: 0px;">
+											<label for="datepicker" class="col-sm-3 col-form-label">Desde</label>
+											<div class="col">
+												<input type="date" id="fechaInicioFut" name="fechaInicioFut" class="form-control"
+													th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}">
+											</div>
+										</div>
+										<div class="form-group row col-sm-12">
+											<label for="datepicker" class="col-sm-3 col-form-label">Hasta</label>
+											<div class="col">
+												<input type="date" id="fechaFinFut" name="fechaFinFut" class="form-control"
+													th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}">
+											</div>
+										</div>	
+									</div>
+								</div>
+								<div class="form-group row col-sm-12" style="margin-bottom: 0px;">
+									<label for="justSolicitud" class="col-form-label">Justificación</label>
+								</div>
+						
+								<div class="col-sm-12">
+									<textarea class="form-control" id="justSolicitud" rows="3"></textarea>
+								</div>	
+							</div>
+					</div>	
+					<div class="mt-5 d-flex justify-content-between">
+							<a th:href="@{/asistencia/fut}" class="btn btn-warning" role="button" title="Regresar"><i
+										class="fas fa-arrow-left"></i> Atrás</a>
+							<button type="button" onclick="registrarNotaAlimento()"
+										title="Guardar documento" class="btn w3-btn w3-teal"
+										style="color: #fff;">
+										<i class="fa-solid fa-save"></i> Registrar
+							</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	
+
+	<footer th:replace="~{fragments/layout :: footer}"></footer>
+
+	<div class="modal fade" id="modalAgregarRacion" aria-hidden="true" aria-labelledby=modalAgregarRacion tabindex="-1">
+		
+	</div>
+
+	<!-- Modal de carga -->
+	<div class="modal" id="modalLoading" data-backdrop="static"
+		data-keyboard="false" tabindex="-1"
+		style="padding-right: 17px; display: none;" aria-modal="true">
+		<div class="modal-dialog modal-sm dialog-loading">
+			<div class="modal-content"
+				style="width: 48px; background-color: transparent; border: none; margin: auto; margin-bottom: 10px;">
+				<span class="loader"></span>
+			</div>
+			<h3 id="messageModalLoading" style="color: white">Cargando . . .</h3>
+		</div>
+	</div>
+	
+	<!-- Modal de confirmación Anulacion -->
+	<div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel"
+	     aria-hidden="true">
+	    <div class="modal-dialog" role="document">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmar Anulación</h5>
+	                <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+	                    <span aria-hidden="true">&times;</span>
+	                </button>
+	            </div>
+	            <div class="modal-body">
+	                <p>¿Está seguro que desea <b>ANULAR</b> la nota?</p>
+	            </div>
+	            <div class="modal-footer">
+	            	<button type="button" class="btn btn-danger delete-confirm-button">Anular</button>
+	                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+	
+	<!-- Modal de confirmación Aprobacion -->
+	<div class="modal fade" id="confirmApproveModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel"
+	     aria-hidden="true">
+	    <div class="modal-dialog" role="document">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <h5 class="modal-title" id="confirmApproveModalLabel">Confirmar Aprobación</h5>
+	                <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+	                    <span aria-hidden="true">&times;</span>
+	                </button>
+	            </div>
+	            <div class="modal-body">
+	                <p>¿Está seguro que desea <b>APROBAR</b> la nota?</p>
+	            </div>
+	            <div class="modal-footer">
+	                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+	                <button type="button" class="btn w3-btn approve-confirm-button" style="color: #fff; background-color: #007bff; border-color: #007bff;">Aprobar</button>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+
+	<div id="addComponent" style="display: none;"></div>
+</body>
+<script th:src="@{/js/jobdesk/asistencia/fut.js}"> </script>
+<script>
+$(document).ready(function() {
+	configuraciones();
+	$("#item-jobdesk").addClass("active");
+});
+</script>
+
+</html>
+
+

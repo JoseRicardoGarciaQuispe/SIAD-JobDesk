@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/layout :: head}"></head>
+<link href="css/login.css" rel="stylesheet"
+			th:href="@{/css/login.css}">
+<body>
+	<div class="container" id="container">
+        <div class="form-container sign-in">
+            <form id="formLogin" method="post" th:action="@{/login}">
+                <h2>LOGIN</h2>
+                <div class="input-wrapper w-100 d-flex align-items-center">
+                	<i class="fa-solid fa-user fa-lg" style="position: absolute;padding-left: 20px;color: darkred;"></i>
+                	<input type="text" id="usuario" class="input-icon" aria-describedby="usuario" name="usuario" placeholder="Usuario" onkeydown="detectarEnter(event)">      
+                </div>
+                <div class="input-wrapper w-100 d-flex align-items-center">
+                	<i class="fa-solid fa-key fa-lg" style="position: absolute;padding-left: 20px;color: darkred;"></i>
+                	<input type="password" id="clave" class="input-icon" name="clave" placeholder="Clave" onkeydown="detectarEnter(event)">   
+                </div>
+<!--                 <div class="form-group row mt-2"> -->
+<!-- 					<label for="oficinaSolicitud" class="col-sm-3 col-form-label">Año:</label> -->
+<!-- 					<div class="col-sm-9"> -->
+<!-- 						<select class="form-control" id="anioEjecucion" name="anioEjecucion"> -->
+<!-- 							<option th:each="anio : ${listaAnios}" th:value="${anio.codigo}" th:text="${anio.codigo}"></option> -->
+<!-- 						</select> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+                <button id="btnIngresar" class="w-100" type="button" onclick="login()" title="Ingresar">
+                	<div id="textIngresar">
+                		<i class="fa-solid fa-right-to-bracket"></i> Ingresar
+                	</div>
+                	<div id="loaderIngresar" class="justify-content-center" style="display:none;">
+                		<span class="loader"></span>
+                	</div>
+                	
+                </button>
+            </form>
+        </div>
+        <div class="toggle-container">
+            <div class="toggle">
+            	
+				<div class="toggle-panel toggle-right">
+					<div class="d-flex justify-content-center align-items-center">
+						<div class="" style="border-right: 2px solid white;padding-right: 10px;margin-right: 10px;">
+							<img th:src="@{/images/escudo_peru.svg}" alt="Spring logo" style="width: 66px;"/>
+						</div>
+						<h1 style="color: white;">SIAD</h1>
+					</div>
+					<p>Sistema Integrado de Apoyo Administrativo</p>
+				</div>
+            </div>
+        </div>
+    </div>
+	<input type="hidden" name="messageError" id="messageError" th:value="${error}">
+	<input type="hidden" name="messageSuccess" id="messageSuccess" th:value="${success}">
+	<input type="hidden" name="messageInfo" id="messageInfo" th:value="${info}">
+	<input type="hidden" name="messageWarning" id="messageWarning" th:value="${warning}">
+	
+</body>
+<script th:src="@{/js/login.js}"> </script>
+<script>
+$(document).ready(function() {
+	configuraciones();
+});
+</script>
+</html>

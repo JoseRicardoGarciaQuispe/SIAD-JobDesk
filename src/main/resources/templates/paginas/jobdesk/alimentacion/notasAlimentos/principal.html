@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="~{fragments/layout :: head}"></head>
+<link href="css/jobdesk/alimentacion/notasAlimentos.css" rel="stylesheet"
+			th:href="@{/css/jobdesk/alimentacion/notasAlimentos.css}">
+<body>
+
+	<div th:replace="~{fragments/menu :: menu}"></div>
+	<div layout:fragment="content" th:remove="tag">
+		<div class="" style="margin: auto;width: 75%;">
+			<h2 style="text-align: center;padding: 20px;margin-bottom: 0px;"><span style="
+			    border-left: 4px solid #BF0909;
+			    margin-right: 10px;"></span>Notas de Alimentos - Atención</h2>
+			<div class="row">
+				<div class="form-group col-lg-12 my-2">
+					<div class="card">
+						<div class="card-header col-lg-12"
+							style="text-align: -webkit-left; display: flex; align-items: center; background-color: #213343; color: white; background-color: #213343;">
+							<i class="fa-solid fa-file-lines"
+								style="font-size: 32px; margin-right: 20px;"></i>
+							<div>
+								<h2 style="text-align: left; margin-bottom: 0px; color: white;">
+									<b>Listado de Notas de Alimentos</b>
+								</h2>
+							</div>
+							<div style="margin-left: auto;">
+								<a th:href="@{/alimentacion/notas-alimentos/nuevo}" class="btn btn-info"
+									role="button" title="Registrar nota"><i
+									class="fa-solid fa-plus"></i> Registrar nota</a>
+							</div>
+						</div>
+						<div class="card-body">
+							<div class="row">
+								
+								<div class="col-lg-1 d-flex align-items-center">
+									<label for="datepicker">Fecha</label>
+								</div>
+								<div class="col-lg-5 d-flex align-items-center">
+									<input type="date" id="fechaNotaInicio"
+										name="fechaNotaInicio"> <label for="datepicker2"
+										style="margin-left: 3px;">al</label> <input type="date"
+										id="fechaNotaFin" name="fechaNotaFin"
+										style="margin-left: 3px;">
+								</div>
+								
+								<div class="col-lg-1 d-flex align-items-center">
+									<label for="label2">Oficina</label>
+								</div>
+								<div class="col-lg-5 d-flex align-items-center">
+									<select id="selectOficina" name="selectOficina"
+										class="form-control">
+										<option th:each="oficina : ${listaOficinas}"
+											th:value="${oficina.codigo}" th:text="${oficina.nombre}"></option>
+									</select>
+								</div>
+								
+							</div>
+
+							<div class="row">
+								
+								<div class="col-lg-1 d-flex align-items-center">
+									<label for="label2">Tipo de Documento</label>
+								</div>
+								<div class="col-lg-5 d-flex align-items-center">
+									<select id="selectTipoDocumento" name="selectTipoDocumento"
+										class="form-control">
+										<option value="" selected>Todos</option>
+										<option th:each="tipoDocumento : ${listaTipoDocumentos}"
+											th:value="${tipoDocumento.codigo}" th:text="${tipoDocumento.nombre}"></option>
+									</select>
+								</div>
+								
+								<div class="col-lg-1 d-flex align-items-center">
+									<label for="label2">Tipo de nota</label>
+								</div>
+								<div class="col-lg-5 d-flex align-items-center">
+									<select id="selectTipoNota" name="selectTipoNota"
+										class="form-control">
+										<option value="" selected>Todos</option>
+										<option th:each="tipoNota : ${listaTipoNotas}"
+											th:value="${tipoNota.codigo}" th:text="${tipoNota.nombre}"></option>
+									</select>
+								</div>
+								
+								
+							</div>
+							
+							<div class="row">
+								
+								<div class="col-lg-1 d-flex align-items-center">
+									<label for="label2">Estado</label>
+								</div>
+								<div class="col-lg-5 d-flex align-items-center">
+									<select id="selectEstado" name="selectEstado"
+										class="form-control">
+										<option value="" selected>Todos</option>
+										<option th:each="estado : ${listaEstados}"
+											th:value="${estado.codigo}" th:text="${estado.nombre}"></option>
+									</select>
+								</div>
+								
+								<div class="col-lg-6 d-flex align-items-center justify-content-end">
+									<button type="button" onclick="buscarNotasAlimentos()"
+										class="btn btn-xs w3-btn w3-red" title="Buscar notas de alimentos">
+										<i class="fas fa-search"></i> Buscar
+									</button>
+								</div>
+								
+								
+							</div>
+							
+						</div>
+					</div>
+				</div>
+				<div class="form-group col-lg-12 my-2">
+					<div class="card">
+					
+						<div class="card-body">							
+							
+							<div class="card" style="border: none">
+							
+								<div class="card-body p-0 m-0">
+
+									<table id="tableNotasAlimentos" class="table table-hover table-sm-vertical" width="100%">
+										<thead class="thead-light">
+											<tr>
+												<th class="" style="text-align: center; vertical-align: inherit; height: auto;"><b>Tipo Doc.</b></th>
+												<th class="" style="text-align: center; vertical-align: inherit; height: auto;"><b>Número</b></th>
+												<th class="" style="text-align: center; vertical-align: inherit; height: auto;"><b>Fecha</b></th>
+												<th class="" style="text-align: center; vertical-align: inherit; height: auto;"><b>Tipo Nota</b></th>
+												<th class="" style="text-align: center; vertical-align: inherit; height: auto;"><b>Oficina</b></th>
+												<th class="" style="text-align: center; vertical-align: inherit; height: auto;"><b>Inicio</b></th>
+												<th class="" style="text-align: center; vertical-align: inherit; height: auto;"><b>Fin</b></th>
+												<th class="" style="text-align: center; vertical-align: inherit; height: auto;"><b>Estado</b></th>
+												<th class="" style="text-align: center; vertical-align: inherit; height: auto;"><b>Opciones</b></th>
+											</tr>
+										</thead>
+										<tbody>
+
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer th:replace="~{fragments/layout :: footer}"></footer>
+	<input type="hidden" name="messageSystem" id="messageSystem" th:value="${messageSystem}">
+	<div class="modal fade" id="modalVerFlujos" aria-hidden="true" aria-labelledby="modalVerFlujos" tabindex="-1"></div>
+	
+	<!-- Modal de carga -->
+	<div class="modal" id="modalLoading" data-backdrop="static"
+		data-keyboard="false" tabindex="-1"
+		style="padding-right: 17px; display: none;" aria-modal="true">
+		<div class="modal-dialog modal-sm dialog-loading">
+			<div class="modal-content"
+				style="width: 48px; background-color: transparent; border: none; margin: auto; margin-bottom: 10px;">
+				<span class="loader"></span>
+			</div>
+			<h3 class="text-center" id="messageModalLoading" style="color: white">Cargando. . .</h3>
+		</div>
+	</div>
+	
+	
+</body>
+<script th:src="@{/js/jobdesk/alimentacion/notasAlimentos.js}"> </script>
+<script>
+$(document).ready(function() {
+	configuraciones();
+	$("#item-jobdesk").addClass("active");
+});
+
+</script>
+</html>
